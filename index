@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Puglia Family Holiday · 11–19 June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..700&family=Hanken+Grotesk:wght@300..800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --cream:#f6efe1;
+    --cream-2:#efe5d1;
+    --paper:#fbf6ec;
+    --ink:#2b2018;
+    --ink-soft:#5d5043;
+    --terracotta:#bd5a35;
+    --terracotta-deep:#9c4526;
+    --olive:#6d7a47;
+    --sea:#2f6f7e;
+    --sea-deep:#1f5260;
+    --gold:#c9912f;
+    --line:rgba(43,32,24,.14);
+    --shadow:0 18px 40px -22px rgba(43,32,24,.45);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(47,111,126,.10), transparent 60%),
+      radial-gradient(900px 500px at -5% 20%, rgba(189,90,53,.10), transparent 55%),
+      var(--cream);
+    background-attachment:fixed;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* subtle paper grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;
+  }
+  .wrap{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 22px 90px;}
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:64px 0 26px;text-align:center;}
+  .eyebrow{
+    font-size:.82rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--terracotta);font-weight:600;margin-bottom:18px;
+    animation:rise .8s .05s both;
+  }
+  .hero h1{
+    font-family:"Fraunces",serif;font-optical-sizing:auto;
+    font-weight:600;font-size:clamp(2.9rem,8vw,5.4rem);line-height:.98;
+    letter-spacing:-.015em;margin:0;
+    animation:rise .9s .12s both;
+  }
+  .hero h1 em{font-style:italic;color:var(--sea);font-weight:500;}
+  .sun{
+    width:54px;height:54px;margin:0 auto 8px;display:block;
+    animation:rise .8s both, spin 40s linear infinite;
+  }
+  .hero .sub{
+    margin:22px auto 0;max-width:640px;font-size:1.05rem;color:var(--ink-soft);
+    animation:rise .9s .2s both;
+  }
+  .facts{
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px;
+    animation:rise .9s .28s both;
+  }
+  .fact{
+    background:var(--paper);border:1px solid var(--line);border-radius:999px;
+    padding:8px 16px;font-size:.9rem;display:flex;gap:8px;align-items:center;
+    box-shadow:0 1px 0 rgba(255,255,255,.7) inset;
+  }
+  .fact b{font-weight:700;}
+  .fact .ic{font-size:1rem;}
+
+  /* ---------- SECTION TITLES ---------- */
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin:54px 0 18px;}
+  .sec-head h2{
+    font-family:"Fraunces",serif;font-weight:600;font-size:1.7rem;margin:0;letter-spacing:-.01em;
+  }
+  .sec-head .rule{flex:1;height:1px;background:var(--line);}
+  .sec-head .count{font-size:.85rem;color:var(--ink-soft);}
+
+  /* ---------- URGENT ---------- */
+  .urgent{
+    background:linear-gradient(180deg,#fff7ec, #fdeede);
+    border:1px solid rgba(189,90,53,.32);
+    border-radius:18px;padding:6px 6px;box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .urgent-title{
+    display:flex;align-items:center;gap:10px;padding:16px 18px 6px;
+    font-weight:700;color:var(--terracotta-deep);letter-spacing:.02em;
+  }
+  .urgent-title .pulse{
+    width:10px;height:10px;border-radius:50%;background:var(--terracotta);
+    box-shadow:0 0 0 0 rgba(189,90,53,.6);animation:pulse 2s infinite;
+  }
+  details.todo{border-top:1px solid rgba(189,90,53,.16);}
+  details.todo:first-of-type{border-top:none;}
+  details.todo>summary{
+    list-style:none;cursor:pointer;padding:14px 18px;display:flex;gap:12px;align-items:flex-start;
+    transition:background .2s;
+  }
+  details.todo>summary::-webkit-details-marker{display:none;}
+  details.todo>summary:hover{background:rgba(189,90,53,.06);}
+  .todo .chev{margin-left:auto;color:var(--terracotta);transition:transform .25s;flex:none;}
+  details.todo[open] .chev{transform:rotate(90deg);}
+  .todo .num{
+    font-family:"Fraunces",serif;font-weight:600;color:var(--terracotta);
+    background:rgba(189,90,53,.12);border-radius:8px;width:26px;height:26px;
+    display:grid;place-items:center;flex:none;font-size:.95rem;
+  }
+  .todo .head{font-weight:600;}
+  .todo .body{padding:0 18px 16px 56px;color:var(--ink-soft);font-size:.96rem;}
+  .todo .body a{color:var(--terracotta-deep);font-weight:600;}
+
+  /* ---------- DAYS ---------- */
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 6px;font-size:.82rem;color:var(--ink-soft);}
+  .legend span{display:flex;align-items:center;gap:6px;}
+  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block;font-style:normal;}
+
+  .day{
+    background:var(--paper);border:1px solid var(--line);border-radius:18px;
+    margin-top:14px;box-shadow:var(--shadow);overflow:hidden;
+    transition:transform .25s, box-shadow .25s, border-color .25s;
+    animation:rise .6s both;
+  }
+  .day:hover{border-color:rgba(47,111,126,.4);}
+  .day.open{transform:translateY(-2px);}
+  .day-top{
+    cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:18px;
+    align-items:center;padding:18px 20px;
+  }
+  .daynum{
+    font-family:"Fraunces",serif;line-height:1;text-align:center;flex:none;
+    border-right:1px solid var(--line);padding-right:18px;
+  }
+  .daynum .n{display:block;font-size:2.2rem;font-weight:600;color:var(--sea);}
+  .daynum .l{display:block;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);margin-top:2px;}
+  .day-main h3{font-family:"Fraunces",serif;font-weight:600;font-size:1.28rem;margin:0 0 7px;letter-spacing:-.01em;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{font-size:.74rem;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--cream);display:flex;gap:5px;align-items:center;}
+  .chip.base{background:rgba(109,122,71,.14);border-color:rgba(109,122,71,.35);color:#4d5733;}
+  .chip.cost{background:rgba(201,145,47,.16);border-color:rgba(201,145,47,.4);color:#8a6312;font-weight:600;}
+  .day-toggle{
+    flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);
+    background:var(--cream);display:grid;place-items:center;color:var(--sea);
+    transition:transform .3s, background .2s;
+  }
+  .day.open .day-toggle{transform:rotate(135deg);background:var(--sea);color:#fff;}
+  .day-toggle svg{width:18px;height:18px;}
+
+  .detail-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s ease;}
+  .day.open .detail-wrap{grid-template-rows:1fr;}
+  .detail{overflow:hidden;}
+  .detail-inner{padding:2px 20px 22px;border-top:1px dashed var(--line);}
+  .block{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid rgba(43,32,24,.07);}
+  .block:last-child{border-bottom:none;}
+  .block .ico{
+    flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:1.05rem;
+  }
+  .ico.route{background:rgba(47,111,126,.13);}
+  .ico.food{background:rgba(189,90,53,.14);}
+  .ico.rain{background:rgba(99,116,140,.16);}
+  .block .label{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:3px;}
+  .block p{margin:0;font-size:.97rem;}
+  .block.rain{background:rgba(99,116,140,.06);margin:6px -12px 0;padding:13px 12px;border-radius:12px;border-bottom:none;}
+  .maplink{
+    display:inline-flex;gap:5px;align-items:center;margin-top:7px;font-size:.83rem;font-weight:600;
+    color:var(--sea-deep);text-decoration:none;border-bottom:1px solid rgba(31,82,96,.35);padding-bottom:1px;
+  }
+  .maplink:hover{color:var(--terracotta-deep);border-color:var(--terracotta-deep);}
+
+  /* ---------- BUDGET ---------- */
+  .budget{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);}
+  table{width:100%;border-collapse:collapse;font-size:.94rem;}
+  thead th{background:var(--sea);color:#fdf6e9;text-align:left;padding:13px 18px;font-weight:600;font-size:.82rem;letter-spacing:.04em;}
+  tbody td{padding:13px 18px;border-top:1px solid var(--line);vertical-align:top;}
+  tbody tr:nth-child(even){background:rgba(109,122,71,.05);}
+  td.cost{white-space:nowrap;font-weight:700;color:var(--terracotta-deep);}
+  td .cat{font-weight:600;}
+  tfoot td{padding:15px 18px;background:rgba(201,145,47,.16);font-weight:700;border-top:2px solid var(--gold);}
+  .trip-total{
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;
+    margin-top:14px;padding:16px 20px;border-radius:14px;
+    background:linear-gradient(100deg,var(--sea),var(--sea-deep));color:#fdf6e9;box-shadow:var(--shadow);
+  }
+  .trip-total .big{font-family:"Fraunces",serif;font-size:1.7rem;font-weight:600;}
+
+  /* ---------- BOOKING TIPS ---------- */
+  .tips{display:grid;gap:12px;}
+  .tip{display:flex;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:15px 18px;box-shadow:0 8px 22px -18px rgba(43,32,24,.5);}
+  .tip .when{flex:none;align-self:flex-start;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#4d5733;background:rgba(109,122,71,.16);border:1px solid rgba(109,122,71,.32);border-radius:999px;padding:5px 11px;}
+  .tip b{font-weight:700;}
+  .tip p{margin:3px 0 0;font-size:.95rem;color:var(--ink-soft);}
+
+  footer{text-align:center;margin-top:60px;color:var(--ink-soft);font-size:.85rem;}
+  footer .hr{height:1px;background:var(--line);margin:0 auto 22px;max-width:120px;}
+
+  /* ---------- ANIM ---------- */
+  @keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(189,90,53,.55);}70%{box-shadow:0 0 0 12px rgba(189,90,53,0);}100%{box-shadow:0 0 0 0 rgba(189,90,53,0);}}
+  @media (max-width:560px){
+    .day-top{grid-template-columns:auto 1fr;}
+    .day-toggle{grid-column:1 / -1;justify-self:end;margin-top:-8px;}
+    .daynum{padding-right:14px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <svg class="sun" viewBox="0 0 100 100" aria-hidden="true">
+      <g fill="none" stroke="#c9912f" stroke-width="5" stroke-linecap="round">
+        <circle cx="50" cy="50" r="18" fill="#e9a83b" stroke="#bd5a35"/>
+        <g stroke="#c9912f">
+          <line x1="50" y1="8" x2="50" y2="20"/><line x1="50" y1="80" x2="50" y2="92"/>
+          <line x1="8" y1="50" x2="20" y2="50"/><line x1="80" y1="50" x2="92" y2="50"/>
+          <line x1="20" y1="20" x2="29" y2="29"/><line x1="71" y1="71" x2="80" y2="80"/>
+          <line x1="80" y1="20" x2="71" y2="29"/><line x1="29" y1="71" x2="20" y2="80"/>
+        </g>
+      </g>
+    </svg>
+    <div class="eyebrow">A Family Itinerary · Salento &amp; Valle d'Itria</div>
+    <h1>Puglia,<br><em>day by day</em></h1>
+    <p class="sub">Nine days along the heel of Italy — beaches, baroque towns, trulli and caves — paced gently around a 2½-year-old's nap schedule. Tap any day to unfold the plan.</p>
+    <div class="facts">
+      <span class="fact"><span class="ic">🗓️</span><b>11 – 19 June 2026</b></span>
+      <span class="fact"><span class="ic">👨‍👩‍👧</span>2 Adults · 1 Toddler <b>(2.5 yo)</b></span>
+      <span class="fact"><span class="ic">🏖️</span>Porto Cesareo <b>· 4 nights</b></span>
+      <span class="fact"><span class="ic">🫒</span>Monopoli <b>· 4 nights</b></span>
+    </div>
+  </header>
+
+  <!-- URGENT -->
+  <section class="sec-head"><h2>Before you go</h2><span class="rule"></span><span class="count">do these today</span></section>
+  <div class="urgent">
+    <div class="urgent-title"><span class="pulse"></span> Urgent action items</div>
+    <details class="todo" open>
+      <summary><span class="num">1</span><span class="head">Move the car-rental pick-up time</span>
+        <span class="chev">›</span></summary>
+      <div class="body">Call Noleggiare (<a href="tel:+393406834156">+39 340 683 4156</a>) or log into Booking.com to change pick-up from <b>10:00 → 12:30</b>. Your flight doesn't land until 11:30 AM — don't get marked as a no-show.</div>
+    </details>
+    <details class="todo">
+      <summary><span class="num">2</span><span class="head">Confirm a toddler-sized life jacket</span>
+        <span class="chev">›</span></summary>
+      <div class="body">Message the boat-tour operator via Tripadvisor to reserve a toddler life jacket for the <b>09:00 departure on June 13</b>.</div>
+    </details>
+    <details class="todo">
+      <summary><span class="num">3</span><span class="head">Mind the hotel cancellation windows</span>
+        <span class="chev">›</span></summary>
+      <div class="body">Free cancellation for <b>Agriturismo Tenuta Chianchizza</b> has already passed. <b>Hotel Posidonia's</b> window closes <b>June 5, 23:59</b>. The plan assumes we keep both bookings.</div>
+    </details>
+  </div>
+
+  <!-- DAYS -->
+  <section class="sec-head"><h2>The week</h2><span class="rule"></span><span class="count">9 days · tap to expand</span></section>
+  <div class="legend">
+    <span><i style="background:rgba(47,111,126,.4)"></i>Route &amp; timeline</span>
+    <span><i style="background:rgba(189,90,53,.5)"></i>Where to eat</span>
+    <span><i style="background:rgba(99,116,140,.5)"></i>Bad-weather backup</span>
+  </div>
+  <div id="days"></div>
+
+  <!-- BUDGET -->
+  <section class="sec-head"><h2>Daily budget guide</h2><span class="rule"></span><span class="count">out-of-pocket, € </span></section>
+  <div class="budget">
+    <table>
+      <thead><tr><th>Expense</th><th>Est. / day</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><span class="cat">Beach lido</span><br><small>1 umbrella + 2 chairs</small></td><td class="cost">€25–40</td><td>Crucial for keeping the toddler shaded from the midday Mediterranean sun.</td></tr>
+        <tr><td><span class="cat">Beach &amp; town parking</span></td><td class="cost">€5–10</td><td>Look for blue lines; keep coins handy for the ticket machines.</td></tr>
+        <tr><td><span class="cat">Lunch</span><br><small>café / puccia / pizza</small></td><td class="cost">€30–45</td><td>Italian portions are generous — toddlers can easily share plates.</td></tr>
+        <tr><td><span class="cat">Dinner</span><br><small>trattoria / seafood</small></td><td class="cost">€50–80</td><td>Includes house wine, water, and the <i>coperto</i> (table cover fee).</td></tr>
+        <tr><td><span class="cat">Gelato, coffee &amp; snacks</span></td><td class="cost">€10–15</td><td>Essential daily moral support.</td></tr>
+        <tr><td><span class="cat">Fuel &amp; minor tolls</span></td><td class="cost">€15–20</td><td>Covers day trips and the final airport return run.</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total estimated daily spend</td><td class="cost">€135–210</td><td>A safe, comfortable baseline for the family.</td></tr></tfoot>
+    </table>
+  </div>
+  <div class="trip-total">
+    <div>Itinerary day-estimates, summed across all 9 days</div>
+    <div class="big">≈ €1,030</div>
+  </div>
+
+  <!-- BOOKING TIPS -->
+  <section class="sec-head"><h2>Reservations to lock in</h2><span class="rule"></span><span class="count">booking tips</span></section>
+  <div class="tips">
+    <div class="tip"><span class="when">2–3 days ahead</span><div><b>Grotte di Castellana</b><p>Buy tickets online for June 18 to lock in a morning slot — same-day tickets frequently sell out.</p></div></div>
+    <div class="tip"><span class="when">1–2 days ahead</span><div><b>Beach lidos</b><p>WhatsApp a beach club at Punta Prosciutto (Lido Oasis or Lido Teranga) before June 12 to guarantee an umbrella and chairs in the shade.</p></div></div>
+    <div class="tip"><span class="when">A few days ahead</span><div><b>Zoosafari Fasano</b><p>Buy tickets online to bypass the gate queues, which back up in the morning sun.</p></div></div>
+    <div class="tip"><span class="when">1 day ahead</span><div><b>High-demand restaurants</b><p>Have your hosts call ahead to secure a kid-friendly table (around 19:30–20:00 when doors open).</p></div></div>
+  </div>
+
+  <footer>
+    <div class="hr"></div>
+    Buon viaggio · Porto Cesareo → Lecce → Ostuni → Alberobello → Polignano → Bari
+  </footer>
+
+</div>
+
+<script>
+const M = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+const days = [
+  { n:1, dow:"Thu", date:"Jun 11", title:"Arrival & Settling In", base:"Porto Cesareo",
+    cost:"€60",
+    route:`Land at <b>11:30 AM</b>, pick up the car by <b>12:30</b>, then drive ~1h 45m to Porto Cesareo. Check in at Hotel Posidonia (opens 14:00), grab toddler essentials at a local <b>Conad</b> supermarket, and hit the local beach.`,
+    place:"Porto Cesareo, Puglia",
+    food:`<b>Carmelo Osteria Tipica Salentina</b> — highly casual, budget-friendly and ultra-welcoming to families.`,
+    foodMap:"Carmelo Osteria Tipica Salentina Porto Cesareo",
+    rain:`Skip the beach stroll. Head to the hotel to unpack and spend a cozy afternoon introducing your toddler to local pastries at a covered café in town.` },
+  { n:2, dow:"Fri", date:"Jun 12", title:"Punta Prosciutto Beach & Stroll", base:"Porto Cesareo",
+    cost:"€130",
+    route:`15-minute drive north to <b>Punta Prosciutto</b>. Be on the sand by <b>09:00</b> to secure parking and a shaded lido spot. Head back by 13:00 for nap time. Evening <i>passeggiata</i> around Porto Cesareo's marina.`,
+    place:"Punta Prosciutto beach",
+    food:`<b>Bacino Grande Restaurant</b> — great seafood right on the water, with space for a stroller.`,
+    foodMap:"Bacino Grande Restaurant Porto Cesareo",
+    rain:`Visit the <b>Marine Biology Museum</b> (Museo di Biologia Marina) in Porto Cesareo — small, but the colorful fish and sea-turtle displays easily captivate a toddler for an hour.` },
+  { n:3, dow:"Sat", date:"Jun 13", title:"Marine Protected Area Boat Tour", base:"Porto Cesareo",
+    cost:"€100",
+    route:`Head to Porto Cesareo Marina by <b>08:30</b> for your pre-booked <b>09:00 boat tour</b>. Keep the afternoon entirely open for nap time and low-key beach/pool recovery.`,
+    place:"Porto Cesareo Marina",
+    food:`<b>Pizzeria Parthenope 2.0</b> — exceptional, fast Neapolitan-style pizzas (fast service is a lifesaver with a tired toddler).`,
+    foodMap:"Pizzeria Parthenope 2.0 Porto Cesareo",
+    rain:`Boat tours cancel if the sea is rough. If so, take a 30-minute drive inland to <b>Nardò</b> to explore its stone loggias and have an indoor lunch at Ristorante Germogli al Mignano.` },
+  { n:4, dow:"Sun", date:"Jun 14", title:"Baroque Charm of Lecce", base:"Porto Cesareo",
+    cost:"€110",
+    route:`40-minute drive inland to <b>Lecce</b>, arriving by 09:30. Stroll the flat, stroller-friendly old town. Grab a <i>pasticciotto</i> at Caffè Alvino in Piazza Sant'Oronzo, then head to the Villa Comunale gardens for the playground.`,
+    place:"Lecce old town, Piazza Sant'Oronzo",
+    food:`<b>Antica Pucceria Giannone dal 1941</b> — traditional, easy-to-hold pocket sandwiches (<i>pucce</i>), followed by artisan gelato at Baldo.`,
+    foodMap:"Antica Pucceria Giannone Lecce",
+    rain:`<b>Museo dei Bambini</b> (Lecce Children's Museum) — a brilliant indoor space of interactive exhibits and sensory play areas tailored for ages 2–5.` },
+  { n:5, dow:"Mon", date:"Jun 15", title:"Move Base via Ostuni", base:"→ Monopoli",
+    cost:"€120",
+    route:`Check out of Porto Cesareo by <b>10:00</b>. Drive 1h 15m to <b>Ostuni</b> (The White City) for an early lunch. <i>Tip: use a baby carrier — the hills are too steep for a stroller.</i> Then 35 minutes to Agriturismo Tenuta Chianchizza for a 16:00 check-in.`,
+    place:"Ostuni, Puglia",
+    food:`<b>Trattoria Il Brigante</b> (Monopoli) — exceptionally welcoming staff and comforting, traditional regional dishes.`,
+    foodMap:"Trattoria Il Brigante Monopoli",
+    rain:`Skip the slippery stone hills of Ostuni. Drive directly to the Agriturismo, let your toddler settle into the triple room, and enjoy an extended indoor dinner at the estate's restaurant.` },
+  { n:6, dow:"Tue", date:"Jun 16", title:"Alberobello Trulli Magic", base:"Monopoli",
+    cost:"€110",
+    route:`45-minute drive to <b>Alberobello</b>, arriving by <b>09:00</b> to beat the tour buses. Stick to the quieter Rione Aia Piccola neighborhood. Return to the Agriturismo by midday for a relaxed pool/farm afternoon.`,
+    place:"Rione Aia Piccola Alberobello",
+    food:`<b>Spaghetti d'Italia</b> (Monopoli) — a great piazza with covered outdoor seating and excellent, toddler-approved fresh pastas.`,
+    foodMap:"Spaghetti d'Italia Monopoli",
+    rain:`Rain makes the stone streets incredibly slick. Swap the walking tour for a long, rustic indoor lunch inside a covered historic estate like Le cucine di Masseria Spina.` },
+  { n:7, dow:"Wed", date:"Jun 17", title:"Polignano a Mare", base:"Monopoli",
+    cost:"€130",
+    route:`15-minute drive to <b>Polignano a Mare</b>. View the famous Lama Monachile cove from the balconies. Grab gelato at Il Super Mago del Gelo. Return for an afternoon nap, then spend the evening at Monopoli's old-town harbor.`,
+    place:"Lama Monachile Polignano a Mare",
+    food:`<b>Pescaria</b> (Polignano a Mare) — elite-tier seafood paninis and fried-fish cones served fast-casual, saving you from a long sit-down meal with a restless toddler.`,
+    foodMap:"Pescaria Polignano a Mare",
+    rain:`Duck out of the rain at <b>Oppure – Kitchen House</b> in Polignano, an all-day brunch and bistro spot with a relaxed, family-friendly vibe.` },
+  { n:8, dow:"Thu", date:"Jun 18", title:"Underground Caves at Castellana", base:"Monopoli",
+    cost:"€140",
+    route:`30-minute drive inland to <b>Grotte di Castellana</b>. Take the short 50-minute (1 km) tour — a cool 16–18°C underground, a perfect escape from the June heat. Use the free baby-carrier hire on-site. Afternoon open for a final pool session.`,
+    place:"Grotte di Castellana",
+    food:`A special farewell dinner directly at your accommodation, <b>Agriturismo Tenuta Chianchizza</b>.`,
+    foodMap:"Agriturismo Tenuta Chianchizza",
+    rain:`The caves are underground and completely dry — this day is perfectly weather-proof as it is!` },
+  { n:9, dow:"Fri", date:"Jun 19", title:"Drive-Through Safari & Home", base:"Departure",
+    cost:"€130",
+    route:`Check out by <b>10:00</b>. Drive 15 minutes to <b>Zoosafari Fasano</b> — stay inside your rental car while giraffes and lions walk past the windows (a massive hit for a 2.5-year-old). Then 50 minutes to Bari: refuel and drop the car by <b>18:00</b> for your <b>20:00 flight</b>.`,
+    place:"Zoosafari Fasano",
+    food:`<b>Bavarotti da Francesco</b> (Monopoli) — if your toddler is tired of pizza and pasta by Day 9, this family favorite serves great schnitzels and comfort food before the airport.`,
+    foodMap:"Bavarotti da Francesco Monopoli",
+    rain:`The drive-through safari keeps you dry in the car! If the weather is truly miserable, head to Bari's covered indoor markets or go early to the airport terminal lounge.` },
+];
+
+const plus = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`;
+const pin = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>`;
+
+const container = document.getElementById("days");
+days.forEach((d,i)=>{
+  const el = document.createElement("article");
+  el.className = "day";
+  el.style.animationDelay = (0.05 + i*0.05) + "s";
+  el.innerHTML = `
+    <div class="day-top">
+      <div class="daynum"><span class="n">${d.n}</span><span class="l">${d.dow} · ${d.date}</span></div>
+      <div class="day-main">
+        <h3>${d.title}</h3>
+        <div class="chips">
+          <span class="chip base">📍 ${d.base}</span>
+          <span class="chip cost">${d.cost} / day</span>
+        </div>
+      </div>
+      <div class="day-toggle" aria-hidden="true">${plus}</div>
+    </div>
+    <div class="detail-wrap"><div class="detail"><div class="detail-inner">
+      <div class="block"><div class="ico route">🧭</div><div>
+        <div class="label">Route &amp; timeline</div><p>${d.route}</p>
+        <a class="maplink" target="_blank" rel="noopener" href="${M(d.place)}">${pin} ${d.place} · open in Maps</a>
+      </div></div>
+      <div class="block"><div class="ico food">🍝</div><div>
+        <div class="label">Where to eat</div><p>${d.food}</p>
+        <a class="maplink" target="_blank" rel="noopener" href="${M(d.foodMap)}">${pin} Find on Maps</a>
+      </div></div>
+      <div class="block rain"><div class="ico rain">🌧️</div><div>
+        <div class="label">Bad-weather backup</div><p>${d.rain}</p>
+      </div></div>
+    </div></div></div>`;
+  el.querySelector(".day-top").addEventListener("click", ()=> el.classList.toggle("open"));
+  container.appendChild(el);
+});
+</script>
+</body>
+</html>
