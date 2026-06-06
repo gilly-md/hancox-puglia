@@ -244,6 +244,13 @@
   .ico.story{background:rgba(201,145,47,.16);}
   .ico.know{background:rgba(109,122,71,.16);}
   .ico.fun{background:rgba(47,111,126,.13);}
+  .guide-cta{
+    display:inline-flex;align-items:center;gap:9px;margin:14px 0 2px;font-weight:600;font-size:.93rem;
+    color:#fdf6e9;background:linear-gradient(135deg,var(--sea),var(--sea-deep));border-radius:999px;
+    padding:12px 21px;text-decoration:none;box-shadow:var(--shadow);transition:transform .2s;
+  }
+  .guide-cta:hover{transform:translateY(-2px);}
+  .guide-cta .sub{font-weight:400;opacity:.85;font-size:.82rem;}
 
   /* ---------- BUDGET ---------- */
   .budget{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);}
@@ -343,6 +350,7 @@
   <!-- KNOW THE PLACE -->
   <section class="sec-head"><h2>Know the place</h2><span class="rule"></span><span class="count">your guide on the go · tap to read</span></section>
   <div class="lore-intro">A pocket history of where you're going — the region, your two bases, and every town on the week. It all lives inside this page, so it's there even when signal isn't. <b>Tap a place to unfold its story.</b></div>
+  <a class="guide-cta" href="discover.html">📷 Open the picture guide &amp; glossary <span class="sub">— photos, read-more &amp; food words (needs signal)</span></a>
   <div id="guide"></div>
 
   <!-- BUDGET -->
