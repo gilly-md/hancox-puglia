@@ -209,10 +209,24 @@
   .wx-day .base{font-size:.58rem;color:var(--ink-soft);opacity:.85;margin-top:1px;}
   .wx-loading{background:var(--paper);border:1px dashed var(--line);border-radius:14px;padding:26px;text-align:center;color:var(--ink-soft);font-size:.92rem;}
   .wx-status{margin-top:10px;font-size:.76rem;color:var(--ink-soft);display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
-  @media(max-width:760px){
-    .wx-strip{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:minmax(96px,1fr);overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity;}
-    .wx-day{scroll-snap-align:start;}
-  }
+  /* today / hourly strip */
+  .wx-today{margin-bottom:16px;}
+  .wx-today-h{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:8px;}
+  .wx-hours{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;}
+  .wx-now{flex:none;background:linear-gradient(135deg,var(--sea),var(--sea-deep));color:#fdf6e9;border-radius:14px;padding:12px 16px;min-width:124px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 10px 24px -16px rgba(43,32,24,.6);}
+  .wx-now .now-t{font-family:"Fraunces",serif;font-size:1.85rem;font-weight:600;line-height:1;}
+  .wx-now .now-l{font-size:.72rem;opacity:.92;margin-top:5px;}
+  .wx-hr{flex:none;scroll-snap-align:start;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:9px;text-align:center;min-width:58px;display:flex;flex-direction:column;align-items:center;gap:2px;}
+  .wx-hr .h{font-size:.64rem;color:var(--ink-soft);font-weight:700;}
+  .wx-hr .e{font-size:1.1rem;line-height:1;}
+  .wx-hr .t{font-weight:700;font-size:.84rem;}
+  .wx-hr .r{font-size:.58rem;color:var(--sea-deep);}
+  .wx-swipe{display:none;font-size:.6rem;letter-spacing:.04em;color:var(--sea-deep);background:rgba(47,111,126,.1);border-radius:999px;padding:1px 7px;margin-left:6px;vertical-align:middle;}
+  @media(max-width:720px){ .wx-swipe{display:inline-block;animation:nudge 1.6s ease-in-out infinite;} }
+  @keyframes nudge{0%,100%{transform:translateX(0);}50%{transform:translateX(3px);}}
+  /* responsive: wrap the 9-day into a tidy grid on phones (no horizontal scroll) */
+  @media(max-width:720px){ .wx-strip{grid-template-columns:repeat(3,1fr);} }
+  @media(max-width:400px){ .wx-strip{grid-template-columns:repeat(2,1fr);} }
 
   /* ---------- BUDGET ---------- */
   .budget{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);}
@@ -292,11 +306,11 @@
         <span class="chev">›</span></summary>
       <div class="body">Message the boat-tour operator via Tripadvisor to reserve a toddler life jacket for the <b>09:00 departure on June 13</b>.</div>
     </details>
-    </details>
   </div>
 
   <!-- WEATHER -->
-  <section class="sec-head"><h2>Weather watch</h2><span class="rule"></span><span class="count">live 9-day forecast</span></section>
+  <section class="sec-head"><h2>Weather watch</h2><span class="rule"></span><span class="count">live · today + 9 days</span></section>
+  <div class="wx-today" id="wx-today"></div>
   <div id="wx" class="wx-loading">Loading live forecast…</div>
   <div class="wx-status" id="wx-status" hidden></div>
 
@@ -387,16 +401,17 @@ const days = [
     ],
     tip:`Afternoon gelato: <b>Baldo</b> (★ 4.6 · 1,038) <a class="maplink" target="_blank" rel="noopener" href="${M('Baldo Gelato Lecce')}">📍 Maps</a> — artisan, in the centro storico. (Morning pasticciotto at Caffè Alvino is in the route above.)`,
     rain:`<b>Museo dei Bambini</b> (Lecce Children's Museum) — a brilliant indoor space of interactive exhibits and sensory play areas tailored for ages 2–5.` },
-  { n:5, dow:"Mon", date:"Jun 15", title:"Move Base via Ostuni", base:"→ Monopoli",
+  { n:5, dow:"Mon", date:"Jun 15", title:"Move Base — Torre Guaceto or Ostuni", base:"→ Monopoli",
     cost:"€120",
-    route:`Check out of Porto Cesareo by <b>10:00</b>. Drive 1h 15m to <b>Ostuni</b> (The White City) for an early lunch. <i>Tip: use a baby carrier — the hills are too steep for a stroller.</i> Then 35 minutes to Agriturismo Tenuta Chianchizza for a 16:00 check-in.`,
-    place:"Ostuni, Puglia",
+    route:`Check out of Porto Cesareo by <b>10:00</b> and break the drive with <b>one</b> stop:<br><b>Option A — Torre Guaceto</b> (~1h–1h15 from Porto Cesareo): a WWF marine reserve — calm shallow sea, boardwalks and a sea-turtle recovery centre; the toddler-easy choice. Then ~40 min to the Agriturismo. <i>[verify summer beach access — may be car-park + eco-shuttle]</i><br><b>Option B — Ostuni</b>, the White City (~1h15): a dramatic hilltop old town — <i>use a baby carrier, the lanes are steep</i> <a class="maplink" target="_blank" rel="noopener" href="${M('Ostuni centro storico')}">📍 Ostuni map</a>. Then ~35 min to the Agriturismo.<br><i>Either way, be back in the car by ~13:30 so she naps on the final leg; check-in from 16:00.</i>`,
+    place:"Riserva di Torre Guaceto Carovigno",
     picks:[
-      {tag:"Main", name:`Trattoria Il Brigante`, rate:"★ 4.5 · 1,576", blurb:`Warm stone trattoria, legendary hospitality; happily customises plain pasta for toddlers. Book ahead — small and lively (loud when full). Via Cavaliere.`, q:"Trattoria Il Brigante Monopoli"},
-      {tag:"Option B", name:`My Wine`, rate:"★ 4.8 · 397", blurb:`Superb, warm-service spot on the same street (Via Cavaliere); excellent seafood.`, q:"My Wine ristorante Monopoli"},
-      {tag:"Calmest", name:`Bavarotti da Francesco`, rate:"★ 4.9 · 506", blurb:`The easiest toddler night — schnitzel and comfort food.`, q:"Bavarotti da Francesco Monopoli"},
+      {tag:"Lunch · Torre Guaceto", name:`Al Diavoletto`, rate:"★ 4.4 · 282", blurb:`Carovigno pizzeria-trattoria near the reserve — pizza and pasta, warm with kids. (Or grilled meats at Braceria Mamma Lena ★ 4.3.)`, q:"Al Diavoletto Pizzeria Carovigno"},
+      {tag:"Lunch · Ostuni", name:`Osteria Ricanatti`, rate:"★ 4.7 · 353", blurb:`Ostuni old-town osteria — homemade pasta, business-lunch menu, happily does small plates for a toddler.`, q:"Osteria Ricanatti Ostuni"},
+      {tag:"Dinner · Monopoli", name:`Trattoria Il Brigante`, rate:"★ 4.5 · 1,576", blurb:`Back at base: warm trattoria, customises plain pasta for toddlers. Book ahead — small and lively. Via Cavaliere.`, q:"Trattoria Il Brigante Monopoli"},
+      {tag:"Dinner · alt", name:`My Wine`, rate:"★ 4.8 · 397", blurb:`Same street (Via Cavaliere); superb, warm service and excellent seafood.`, q:"My Wine ristorante Monopoli"},
     ],
-    rain:`Skip the slippery stone hills of Ostuni. Drive directly to the Agriturismo, let your toddler settle into the triple room, and enjoy an extended indoor dinner at the estate's restaurant.` },
+    rain:`Wet day? Skip both the Torre Guaceto beach and Ostuni's slippery hills — drive straight to the Agriturismo, let the toddler settle into the triple room, and dine in at the estate.` },
   { n:6, dow:"Tue", date:"Jun 16", title:"Alberobello Trulli Magic", base:"Monopoli",
     cost:"€110",
     route:`45-minute drive to <b>Alberobello</b>, arriving by <b>09:00</b> to beat the tour buses. Stick to the quieter Rione Aia Piccola neighborhood. Return to the Agriturismo by midday for a relaxed pool/farm afternoon.`,
@@ -415,6 +430,7 @@ const days = [
       {tag:"Option B", name:`Calapà`, rate:"★ 4.7 · 366", blurb:`Seafront Polignano dining — fresh de-boned fish, stunning coastal views.`, q:"Calapà Polignano a Mare"},
       {tag:"Quick lunch", name:`Pescaria`, rate:"★ 4.3 · 15,201", blurb:`Fast gourmet seafood paninis for a quick toddler lunch — queue at peak, go at 12:00.`, q:"Pescaria Polignano a Mare"},
     ],
+    tip:`☀️ <b>Hot afternoon?</b> <b>Aquapark Egnazia</b> (Capitolo, ~15 min from base — baby pool + lazy river) <a class="maplink" target="_blank" rel="noopener" href="${M('Aquapark Egnazia Monopoli')}">📍 Maps</a> is a weather-call swap for the afternoon. Opens mid-June — verify it's open before you go.`,
     rain:`Duck out of the rain at <b>Oppure – Kitchen House</b> in Polignano, an all-day brunch and bistro spot with a relaxed, family-friendly vibe.` },
   { n:8, dow:"Thu", date:"Jun 18", title:"Underground Caves at Castellana", base:"Monopoli",
     cost:"€140",
@@ -428,7 +444,7 @@ const days = [
     rain:`The caves are underground and completely dry — this day is perfectly weather-proof as it is!` },
   { n:9, dow:"Fri", date:"Jun 19", title:"Drive-Through Safari & Home", base:"Departure",
     cost:"€130",
-    route:`Check out by <b>10:00</b>. Drive 15 minutes to <b>Zoosafari Fasano</b> — stay inside your rental car while giraffes and lions walk past the windows (a massive hit for a 2.5-year-old). Then 50 minutes to Bari: refuel and drop the car by <b>18:00</b> for your <b>20:00 flight</b>.`,
+    route:`Check out by <b>10:00</b>. Drive 15 minutes to <b>Zoosafari Fasano</b> — stay inside your rental car while giraffes and lions walk past the windows (a massive hit for a 2.5-year-old). Then 50 minutes to Bari: refuel and drop the car by <b>18:00</b> for your <b>20:00 flight</b>. <b>Cap-and-go:</b> Zoosafari opens 09:30 — do the drive-through loop only (skip the Fasanolandia rides) and be rolling toward Bari by <b>14:30</b> to protect the airport buffer.`,
     place:"Zoosafari Fasano",
     picks:[
       {tag:"Main", name:`Panificio Fiore`, rate:"★ 4.6 · 3,658", blurb:`Bari — legendary focaccia barese, fast and portable; grab a warm slice for the airport run. Almost no seating, pure grab-and-go — perfect for a tight departure day.`, q:"Panificio Fiore Bari"},
@@ -541,7 +557,39 @@ function renderWeather(data){
   wxStatus.innerHTML=`<span><span style="color:var(--olive)">●</span> Live · Open-Meteo · checked ${t} · refreshes each time you open this page.</span>`
     +`<span>💧 Blue = ≥40% rain chance — glance at that day's bad-weather backup.</span>`;
 }
+
+async function loadToday(){
+  const box=document.getElementById("wx-today");
+  if(!box) return;
+  try{
+    const loc=(new Date().toISOString().slice(0,10) >= "2026-06-15") ? "mono" : "pc";
+    const {lat,lon,name}=WX_LOC[loc];
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`
+      +`&current=temperature_2m,weather_code`
+      +`&hourly=temperature_2m,weather_code,precipitation_probability`
+      +`&timezone=Europe/Rome&forecast_days=2`;
+    const r=await fetch(url); if(!r.ok) throw new Error("HTTP "+r.status);
+    const d=await r.json();
+    if(!d.current || !d.hourly || !d.hourly.time) return;
+    const [ce,cl]=WMO[d.current.weather_code]||["❓","—"];
+    const ct=Math.round(d.current.temperature_2m);
+    const nowKey=(d.current.time||"").slice(0,13);
+    let start=d.hourly.time.findIndex(t=>t.slice(0,13) >= nowKey);
+    if(start<0) start=0;
+    const cells=d.hourly.time.slice(start, start+12).map((t,j)=>{
+      const idx=start+j;
+      const [e]=WMO[d.hourly.weather_code[idx]]||["❓"];
+      const tt=Math.round(d.hourly.temperature_2m[idx]);
+      const rr=d.hourly.precipitation_probability[idx] ?? 0;
+      return `<div class="wx-hr"><div class="h">${t.slice(11,16)}</div><div class="e">${e}</div><div class="t">${tt}°</div><div class="r">💧${rr}%</div></div>`;
+    }).join("");
+    box.innerHTML=`<div class="wx-today-h">Today in ${name} · next 12 hours <span class="wx-swipe">swipe →</span></div>`
+      +`<div class="wx-hours"><div class="wx-now"><div class="now-t">${ct}°</div><div class="now-l">${ce} ${cl} · now</div></div>${cells}</div>`;
+  }catch(e){ /* leave the today slot empty — the 9-day strip still shows */ }
+}
+
 loadWeather();
+loadToday();
 </script>
 </body>
 </html>
