@@ -228,6 +228,22 @@
   @media(max-width:720px){ .wx-strip{grid-template-columns:repeat(3,1fr);} }
   @media(max-width:400px){ .wx-strip{grid-template-columns:repeat(2,1fr);} }
 
+  /* ---------- GUIDE / LORE ---------- */
+  .lore-intro{
+    background:var(--paper);border:1px solid var(--line);border-radius:18px;
+    padding:20px 22px;box-shadow:var(--shadow);color:var(--ink-soft);font-size:1rem;margin-bottom:4px;
+  }
+  .lore-intro b{color:var(--ink);}
+  .lore-badge{
+    font-size:1.55rem;line-height:1;flex:none;width:48px;height:48px;border-radius:14px;
+    display:grid;place-items:center;background:rgba(109,122,71,.13);border:1px solid rgba(109,122,71,.26);
+    align-self:center;
+  }
+  .lore-sub{font-size:.8rem;color:var(--ink-soft);margin-top:5px;}
+  .ico.story{background:rgba(201,145,47,.16);}
+  .ico.know{background:rgba(109,122,71,.16);}
+  .ico.fun{background:rgba(47,111,126,.13);}
+
   /* ---------- BUDGET ---------- */
   .budget{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);}
   table{width:100%;border-collapse:collapse;font-size:.94rem;}
@@ -322,6 +338,11 @@
     <span><i style="background:rgba(99,116,140,.5)"></i>Bad-weather backup</span>
   </div>
   <div id="days"></div>
+
+  <!-- KNOW THE PLACE -->
+  <section class="sec-head"><h2>Know the place</h2><span class="rule"></span><span class="count">your guide on the go · tap to read</span></section>
+  <div class="lore-intro">A pocket history of where you're going — the region, your two bases, and every town on the week. It all lives inside this page, so it's there even when signal isn't. <b>Tap a place to unfold its story.</b></div>
+  <div id="guide"></div>
 
   <!-- BUDGET -->
   <section class="sec-head"><h2>Daily budget guide</h2><span class="rule"></span><span class="count">out-of-pocket, € </span></section>
@@ -490,6 +511,93 @@ days.forEach((d,i)=>{
     </div></div></div>`;
   el.querySelector(".day-top").addEventListener("click", ()=> el.classList.toggle("open"));
   container.appendChild(el);
+});
+
+/* ---------- KNOW THE PLACE (pocket history / culture guide) ---------- */
+const guide = [
+  { emoji:"🌍", title:"Puglia — the heel of Italy", tag:"The region · two seas, thousand-year olive country",
+    story:`Puglia is the long, sun-baked heel of the Italian boot, edged by two seas — the Ionian to the west and the Adriatic to the east. Over the centuries it was Greek, Roman, Byzantine, Norman and Swabian in turn, and each left its mark in the stone. Today it's Italy's olive-oil heartland, silver groves rolling between whitewashed towns — some of the trees over a thousand years old.`,
+    know:`Life runs late and slow. Many shops and sights close for <i>riposo</i> (roughly 13:30–17:00), and dinner rarely starts before 20:00. Evenings belong to the <i>passeggiata</i> — the whole town strolling before supper, toddlers and grandparents included.`,
+    fun:`Puglia presses <b>40–50% of all Italy's olive oil</b> — more than any other region.` },
+
+  { emoji:"🏖️", title:"Salento — the tip of the heel", tag:"Around Porto Cesareo · Greek roots & the pizzica",
+    story:`Porto Cesareo sits in the <b>Salento</b>, the very point of the heel where the two seas almost meet. This was deep Greek territory once, and the roots run so far down that a Greek-derived dialect, <i>Griko</i>, is still spoken in a handful of inland villages. The Salento is also home to <i>pizzica</i>, the fast, hypnotic tarantella danced at summer festivals.`,
+    know:`Two coasts, two characters: your Ionian side has shallow, pale-sand, lagoon-like water that's ideal for little ones, while the Adriatic side is rockier and more dramatic.`,
+    fun:`Legend says the <i>pizzica</i> was once a "cure" for a tarantula's bite — you danced until the venom left you.` },
+
+  { emoji:"⚓", title:"Porto Cesareo", tag:"Your first base · 11–15 June",
+    story:`A working fishing town wrapped around a protected marine reserve, with water so clear and pale it's nicknamed the "Caribbean of Salento." The squat watchtower on the headland is one of dozens strung along this coast in the 1500s to spot Saracen and Ottoman raiders far out at sea.`,
+    know:`The whole bay is a <b>marine protected area</b> — snorkelling is lovely, but leave shells, sand and sea life where they are. The dunes of Punta Prosciutto, just north, rank among Italy's finest beaches.`,
+    fun:`A little offshore islet, the <i>Isola dei Conigli</i> (Rabbit Island), is shallow enough to wade out to when the sea is calm and low.` },
+
+  { emoji:"⛪", title:"Lecce — the Florence of the South", tag:"Day trip · 14 June · the Baroque capital",
+    story:`Lecce is the Baroque capital of the south — a whole golden city carved from soft local limestone, <i>pietra leccese</i>. The stone is so workable that 17th-century masons smothered the façades in swirling stone flowers, saints and beasts. Beneath the main square lies a Roman amphitheatre that once held as many as 25,000 spectators.`,
+    know:`The showpiece is the <b>Basilica di Santa Croce</b>, an explosion of carved stone. The old town is flat and stroller-friendly — and the local treat is the <i>pasticciotto</i>, a warm custard-filled shortcrust born in this corner of Puglia.`,
+    fun:`Pietra leccese is soft enough to cut with a knife when freshly quarried — it only hardens once it meets the open air.` },
+
+  { emoji:"🤍", title:"Ostuni — the White City", tag:"Optional stop · 15 June · hilltop maze",
+    story:`Ostuni tumbles down its hilltop as a maze of blinding lime-washed houses, visible for miles across the olive plain. The whitewash was practical as much as pretty — lime was cheap, it brightened the dark alleys, and as a disinfectant it's credited with helping the town survive the plague.`,
+    know:`The lanes are steep, stepped and cobbled — a <b>baby carrier beats a stroller</b> here. The reward is the view from the cathedral terrace, out over a "sea of olives" to the Adriatic.`,
+    fun:`In a cave just outside town, archaeologists found "Delia" — the roughly 28,000-year-old skeleton of a pregnant woman, one of the oldest such burials ever discovered.` },
+
+  { emoji:"🫒", title:"The Valle d'Itria & the trulli", tag:"Monopoli's hinterland · valley of cone-roofed huts",
+    story:`Inland from Monopoli rolls the <b>Valle d'Itria</b>, a green patchwork of vineyards and olive groves studded with <i>trulli</i> — round whitewashed huts with conical dry-stone roofs, stacked without a drop of mortar. The famous story goes that they were built mortar-free so they could be pulled down in a hurry whenever the taxman came counting houses.`,
+    know:`The valley is dotted with <i>masserie</i> — old fortified farm estates, many now agriturismi and restaurants (yours included). Roads are narrow and winding; take them slowly.`,
+    fun:`Many roof-cones are crowned with a hand-carved stone pinnacle and painted with a white symbol — astrological, religious or magical — whose meanings are now mostly forgotten.` },
+
+  { emoji:"🏠", title:"Alberobello — capital of the trulli", tag:"Day trip · 16 June · UNESCO trulli town",
+    story:`Alberobello is the trulli city — over 1,500 of them packed into two old quarters, the busy Rione Monti and the quieter Rione Aia Piccola. It has been a <b>UNESCO World Heritage Site</b> since 1996.`,
+    know:`Go early — by mid-morning Rione Monti fills with coach tours and many trulli are now souvenir shops. <b>Aia Piccola</b> (your pick) stays residential and calm.`,
+    fun:`One trullo, the <i>Trullo Sovrano</i>, is the only two-storey trullo ever built.` },
+
+  { emoji:"🌊", title:"Polignano a Mare", tag:"Day trip · 17 June · cliffs over the Adriatic",
+    story:`Polignano clings to white cliffs straight above the Adriatic, its old town honeycombed with sea caves. The signature sight is <b>Lama Monachile</b> — a tiny beach wedged in a ravine between the rock walls, under an old stone bridge.`,
+    know:`The best views are from the cliff-edge balconies and old-town terraces — but many edges are <b>unfenced</b>, so keep little hands held tight. Gelato and caffè cluster through the centro storico.`,
+    fun:`Polignano is the birthplace of <b>Domenico Modugno</b>, who wrote "Volare" — a bronze statue of him stands arms-flung-open on the seafront.` },
+
+  { emoji:"🚤", title:"Monopoli", tag:"Your second base · 15–19 June",
+    story:`Monopoli is a centuries-old Adriatic port — its name comes from the Greek for "single city." Behind a working harbour still full of bright wooden fishing boats, the old town piles up white houses, a 16th-century castle built for Charles V, and a richly Baroque cathedral.`,
+    know:`The old town is flat and walkable, with the harbour and the little Cala Porta Vecchia town beach right in the centre — gentle, toddler-friendly evenings.`,
+    fun:`Legend says the town's beloved icon of the Madonna arrived by sea on a raft in 1117, and its timber was used to roof the cathedral — Monopoli still celebrates it each December (and again in August).` },
+
+  { emoji:"🕳️", title:"Grotte di Castellana", tag:"Day trip · 18 June · caves underground",
+    story:`A spectacular three-kilometre system of underground caverns, fully explored only in 1938 by the speleologist Franco Anelli. Its deepest chamber, the dazzling <b>Grotta Bianca</b> (White Cave), is often called the most beautiful cave in the world.`,
+    know:`It holds a steady <b>15–18°C</b> down there — bring a light layer even in June, and use the free baby-carrier hire, as strollers can't go below.`,
+    fun:`The entrance cavern, <i>La Grave</i>, is a 60-metre-deep sinkhole open to the sky — for centuries villagers used it as the local rubbish pit, never guessing what lay beyond.` },
+
+  { emoji:"🛐", title:"Bari — the way home", tag:"Departure · 19 June · capital & airport",
+    story:`Puglia's lively capital and your gateway home. Its tangled old town, <b>Bari Vecchia</b>, wraps around the Basilica di San Nicola, which since 1087 has guarded the relics of <b>Saint Nicholas</b> — the bishop who became Santa Claus — drawing Catholic and Orthodox pilgrims alike.`,
+    know:`If you have a spare hour before the airport, Bari Vecchia is the place for it. Otherwise grab warm <b>focaccia barese</b> for the road — it's the city's signature.`,
+    fun:`In Bari Vecchia, women still make <i>orecchiette</i> by hand on tables in the street — one lane is known simply as "orecchiette street."` },
+];
+
+const gWrap = document.getElementById("guide");
+guide.forEach((g,i)=>{
+  const el=document.createElement("article");
+  el.className="day";
+  el.style.animationDelay=(0.04+i*0.04)+"s";
+  el.innerHTML=`
+    <div class="day-top">
+      <div class="lore-badge" aria-hidden="true">${g.emoji}</div>
+      <div class="day-main">
+        <h3>${g.title}</h3>
+        <div class="lore-sub">${g.tag}</div>
+      </div>
+      <div class="day-toggle" aria-hidden="true">${plus}</div>
+    </div>
+    <div class="detail-wrap"><div class="detail"><div class="detail-inner">
+      <div class="block"><div class="ico story">📖</div><div>
+        <div class="label">The story</div><p>${g.story}</p>
+      </div></div>
+      <div class="block"><div class="ico know">💡</div><div>
+        <div class="label">Good to know</div><p>${g.know}</p>
+      </div></div>
+      <div class="block"><div class="ico fun">✨</div><div>
+        <div class="label">Did you know</div><p>${g.fun}</p>
+      </div></div>
+    </div></div></div>`;
+  el.querySelector(".day-top").addEventListener("click",()=>el.classList.toggle("open"));
+  gWrap.appendChild(el);
 });
 
 /* ---------- WEATHER (live, refreshes every time the page is opened) ---------- */
