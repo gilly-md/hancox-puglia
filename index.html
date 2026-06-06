@@ -177,6 +177,32 @@
     color:var(--sea-deep);text-decoration:none;border-bottom:1px solid rgba(31,82,96,.35);padding-bottom:1px;
   }
   .maplink:hover{color:var(--terracotta-deep);border-color:var(--terracotta-deep);}
+  .rate{display:inline-block;font-size:.7rem;font-weight:700;color:#8a6312;background:rgba(201,145,47,.16);border:1px solid rgba(201,145,47,.4);border-radius:999px;padding:1px 8px;margin:0 2px;vertical-align:middle;white-space:nowrap;}
+  .note{display:block;margin-top:7px;font-size:.86rem;color:var(--ink-soft);}
+  .note b{color:var(--terracotta-deep);}
+  .alt{display:block;margin-top:8px;padding-top:8px;border-top:1px dotted var(--line);font-size:.92rem;}
+  .alt .maplink{margin-top:0;margin-left:6px;font-size:.78rem;}
+
+  /* ---------- WEATHER ---------- */
+  .wx-strip{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;}
+  .wx-day{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 6px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;box-shadow:0 8px 22px -18px rgba(43,32,24,.5);transition:border-color .2s,transform .2s;}
+  .wx-day:hover{transform:translateY(-2px);}
+  .wx-day.wet{border-color:rgba(47,111,126,.4);background:linear-gradient(180deg,var(--paper),rgba(47,111,126,.06));}
+  .wx-day .wd{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;}
+  .wx-day .emoji{font-size:1.55rem;line-height:1;margin:3px 0 1px;}
+  .wx-day .lbl{font-size:.68rem;color:var(--ink-soft);line-height:1.25;min-height:2.4em;display:flex;align-items:center;}
+  .wx-day .temp{font-family:"Fraunces",serif;font-weight:600;font-size:1.02rem;color:var(--ink);}
+  .wx-day .temp .lo{color:var(--ink-soft);font-weight:400;font-size:.8rem;}
+  .wx-day .rain{font-size:.66rem;font-weight:700;border-radius:999px;padding:1px 7px;margin-top:2px;}
+  .wx-day .rain.dry{color:#4d5733;background:rgba(109,122,71,.14);}
+  .wx-day .rain.wet{color:var(--sea-deep);background:rgba(47,111,126,.16);}
+  .wx-day .base{font-size:.58rem;color:var(--ink-soft);opacity:.85;margin-top:1px;}
+  .wx-loading{background:var(--paper);border:1px dashed var(--line);border-radius:14px;padding:26px;text-align:center;color:var(--ink-soft);font-size:.92rem;}
+  .wx-status{margin-top:10px;font-size:.76rem;color:var(--ink-soft);display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+  @media(max-width:760px){
+    .wx-strip{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:minmax(96px,1fr);overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity;}
+    .wx-day{scroll-snap-align:start;}
+  }
 
   /* ---------- BUDGET ---------- */
   .budget{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);}
@@ -246,10 +272,10 @@
   <section class="sec-head"><h2>Before you go</h2><span class="rule"></span><span class="count">do these today</span></section>
   <div class="urgent">
     <div class="urgent-title"><span class="pulse"></span> Urgent action items</div>
-    <details class="todo" open>
-      <summary><span class="num">1</span><span class="head">Move the car-rental pick-up time</span>
+    <details class="todo">
+      <summary><span class="num">✓</span><span class="head">Car pick-up time — sorted ✅</span>
         <span class="chev">›</span></summary>
-      <div class="body">Call Noleggiare (<a href="tel:+393406834156">+39 340 683 4156</a>) or log into Booking.com to change pick-up from <b>10:00 → 12:30</b>. Your flight doesn't land until 11:30 AM — don't get marked as a no-show.</div>
+      <div class="body">Rebooked: pick-up now <b>12:30</b> (after the 11:30 landing), Skoda Karoq kept, child seat + full insurance included, and £162 cheaper. Confirmation details are in your private trip note. Noleggiare desk: <a href="tel:+393406834156">+39 340 683 4156</a>.</div>
     </details>
     <details class="todo">
       <summary><span class="num">2</span><span class="head">Confirm a toddler-sized life jacket</span>
@@ -262,6 +288,11 @@
       <div class="body">Free cancellation for <b>Agriturismo Tenuta Chianchizza</b> has already passed. <b>Hotel Posidonia's</b> window closes <b>June 5, 23:59</b>. The plan assumes we keep both bookings.</div>
     </details>
   </div>
+
+  <!-- WEATHER -->
+  <section class="sec-head"><h2>Weather watch</h2><span class="rule"></span><span class="count">live 9-day forecast</span></section>
+  <div id="wx" class="wx-loading">Loading live forecast…</div>
+  <div class="wx-status" id="wx-status" hidden></div>
 
   <!-- DAYS -->
   <section class="sec-head"><h2>The week</h2><span class="rule"></span><span class="count">9 days · tap to expand</span></section>
@@ -316,49 +347,49 @@ const days = [
     cost:"€60",
     route:`Land at <b>11:30 AM</b>, pick up the car by <b>12:30</b>, then drive ~1h 45m to Porto Cesareo. Check in at Hotel Posidonia (opens 14:00), grab toddler essentials at a local <b>Conad</b> supermarket, and hit the local beach.`,
     place:"Porto Cesareo, Puglia",
-    food:`<b>Carmelo Osteria Tipica Salentina</b> — highly casual, budget-friendly and ultra-welcoming to families.`,
+    food:`<b>Carmelo Osteria Tipica Salentina</b> <span class="rate">★ 4.3 · 12</span> — highly casual, budget-friendly and ultra-welcoming to families.<span class="note"><b>Good to know:</b> very few Google reviews (tiny sample) but TheFork rates it 8.2/10 — praised for friendly, fast service and live music on the back patio. Walk-in, no booking needed. Lean casual pizza/fritti rather than refined Salentine cooking.</span>`,
     foodMap:"Carmelo Osteria Tipica Salentina Porto Cesareo",
     rain:`Skip the beach stroll. Head to the hotel to unpack and spend a cozy afternoon introducing your toddler to local pastries at a covered café in town.` },
   { n:2, dow:"Fri", date:"Jun 12", title:"Punta Prosciutto Beach & Stroll", base:"Porto Cesareo",
     cost:"€130",
     route:`15-minute drive north to <b>Punta Prosciutto</b>. Be on the sand by <b>09:00</b> to secure parking and a shaded lido spot. Head back by 13:00 for nap time. Evening <i>passeggiata</i> around Porto Cesareo's marina.`,
     place:"Punta Prosciutto beach",
-    food:`<b>Bacino Grande Restaurant</b> — great seafood right on the water, with space for a stroller.`,
-    foodMap:"Bacino Grande Restaurant Porto Cesareo",
+    food:`<b>Bacino Grande Restaurant</b> <span class="rate">★ 4.6 · 56</span> — great seafood right on the water, with space for a stroller.<span class="note"><b>Good to know:</b> it's actually in <b>Torre Lapillo</b> (just north of Punta Prosciutto), so it's handy for this beach day. Small review count, and some reviewers note prices run high for the quality — a lovely terrace setting more than a bargain.</span>`,
+    foodMap:"Bacino Grande Restaurant Torre Lapillo",
     rain:`Visit the <b>Marine Biology Museum</b> (Museo di Biologia Marina) in Porto Cesareo — small, but the colorful fish and sea-turtle displays easily captivate a toddler for an hour.` },
   { n:3, dow:"Sat", date:"Jun 13", title:"Marine Protected Area Boat Tour", base:"Porto Cesareo",
     cost:"€100",
     route:`Head to Porto Cesareo Marina by <b>08:30</b> for your pre-booked <b>09:00 boat tour</b>. Keep the afternoon entirely open for nap time and low-key beach/pool recovery.`,
     place:"Porto Cesareo Marina",
-    food:`<b>Pizzeria Parthenope 2.0</b> — exceptional, fast Neapolitan-style pizzas (fast service is a lifesaver with a tired toddler).`,
+    food:`<b>Pizzeria Parthenope 2.0</b> <span class="rate">★ 4.6 · 1,593</span> — exceptional, fast Neapolitan-style pizzas (fast service is a lifesaver with a tired toddler).<span class="note"><b>Good to know:</b> recent reviewers call it "good for families, early easy dinner" and "fast even when busy." The one risk is the queue if you turn up late — <b>go right at opening (~19:00)</b> and you'll sail through. Fair pricing (€8–16 a pizza).</span>`,
     foodMap:"Pizzeria Parthenope 2.0 Porto Cesareo",
-    rain:`Boat tours cancel if the sea is rough. If so, take a 30-minute drive inland to <b>Nardò</b> to explore its stone loggias and have an indoor lunch at Ristorante Germogli al Mignano.` },
+    rain:`Boat tours cancel if the sea is rough. If so, take a 30-minute drive inland to <b>Nardò</b> to explore its stone loggias and have lunch at <b>Ristorante Germogli al Mignano</b> <span class="rate">★ 4.3 · 379</span>.<span class="note"><b>Heads-up:</b> this is a fine-dining rooftop (praised seafood/sushi), pricier and more formal than a trattoria — and rain shuts the terrace that's its main draw. Brilliant for a special dinner; for an easy wet-day toddler lunch a casual Nardò centro trattoria is comfier.</span>` },
   { n:4, dow:"Sun", date:"Jun 14", title:"Baroque Charm of Lecce", base:"Porto Cesareo",
     cost:"€110",
-    route:`40-minute drive inland to <b>Lecce</b>, arriving by 09:30. Stroll the flat, stroller-friendly old town. Grab a <i>pasticciotto</i> at Caffè Alvino in Piazza Sant'Oronzo, then head to the Villa Comunale gardens for the playground.`,
+    route:`40-minute drive inland to <b>Lecce</b>, arriving by 09:30. Stroll the flat, stroller-friendly old town. Grab a <i>pasticciotto</i> at <b>Caffè Alvino</b> <span class="rate">★ 4.2 · 5,152</span> in Piazza Sant'Oronzo, then head to the Villa Comunale gardens for the playground.`,
     place:"Lecce old town, Piazza Sant'Oronzo",
-    food:`<b>Antica Pucceria Giannone dal 1941</b> — traditional, easy-to-hold pocket sandwiches (<i>pucce</i>), followed by artisan gelato at Baldo.`,
+    food:`<b>Antica Pucceria Giannone dal 1941</b> <span class="rate">★ 4.7 · 957</span> — traditional, easy-to-hold pocket sandwiches (<i>pucce</i>), followed by artisan gelato at <b>Baldo</b> <span class="rate">★ 4.6 · 1,038</span>.<span class="note"><b>Good to know:</b> Giannone is the best-rated stop of the day — go before 12:30 or take the <i>pucce</i> away (it's small, tight for a stroller). <b>Caffè Alvino</b> (the morning pastry stop) is iconic and genuinely good — recent reviews praise the pasticciotto, rustico and the staff — it just gets crowded at peak, so grab a table early or take it to go.</span>`,
     foodMap:"Antica Pucceria Giannone Lecce",
     rain:`<b>Museo dei Bambini</b> (Lecce Children's Museum) — a brilliant indoor space of interactive exhibits and sensory play areas tailored for ages 2–5.` },
   { n:5, dow:"Mon", date:"Jun 15", title:"Move Base via Ostuni", base:"→ Monopoli",
     cost:"€120",
     route:`Check out of Porto Cesareo by <b>10:00</b>. Drive 1h 15m to <b>Ostuni</b> (The White City) for an early lunch. <i>Tip: use a baby carrier — the hills are too steep for a stroller.</i> Then 35 minutes to Agriturismo Tenuta Chianchizza for a 16:00 check-in.`,
     place:"Ostuni, Puglia",
-    food:`<b>Trattoria Il Brigante</b> (Monopoli) — exceptionally welcoming staff and comforting, traditional regional dishes.`,
+    food:`<b>Trattoria Il Brigante</b> (Monopoli) <span class="rate">★ 4.5 · 1,576</span> — exceptionally welcoming staff and comforting, traditional dishes; standout fresh seafood (spaghettoni with red prawns, gnocchi with clams).<span class="note"><b>Good to know:</b> small and fills fast — <b>book ahead</b>, and it gets loud and cramped when full (lively, not a calm-toddler room). Ask for host Antonio.</span><span class="alt"><b>Calmer toddler option, same town:</b> <b>Bavarotti da Francesco</b> <span class="rate">★ 4.9 · 506</span> — schnitzel &amp; comfort food, about the easiest toddler dinner going.<a class="maplink" target="_blank" rel="noopener" href="${M('Bavarotti da Francesco Monopoli')}">📍 Maps</a></span>`,
     foodMap:"Trattoria Il Brigante Monopoli",
     rain:`Skip the slippery stone hills of Ostuni. Drive directly to the Agriturismo, let your toddler settle into the triple room, and enjoy an extended indoor dinner at the estate's restaurant.` },
   { n:6, dow:"Tue", date:"Jun 16", title:"Alberobello Trulli Magic", base:"Monopoli",
     cost:"€110",
     route:`45-minute drive to <b>Alberobello</b>, arriving by <b>09:00</b> to beat the tour buses. Stick to the quieter Rione Aia Piccola neighborhood. Return to the Agriturismo by midday for a relaxed pool/farm afternoon.`,
     place:"Rione Aia Piccola Alberobello",
-    food:`<b>Spaghetti d'Italia</b> (Monopoli) — a great piazza with covered outdoor seating and excellent, toddler-approved fresh pastas.`,
+    food:`<b>Spaghetti d'Italia</b> (Monopoli) <span class="rate">★ 4.8 · 1,958</span> — a great piazza (Piazza S. Antonio) with covered outdoor seating and excellent, toddler-approved fresh pastas.<span class="note"><b>Good to know:</b> top-rated and toddler-perfect (plain-pasta heaven). Right on the same square is <b>Bavarotti da Francesco</b> <span class="rate">★ 4.9 · 506</span> for schnitzel/comfort food — easy to choose between them on the day.</span>`,
     foodMap:"Spaghetti d'Italia Monopoli",
-    rain:`Rain makes the stone streets incredibly slick. Swap the walking tour for a long, rustic indoor lunch inside a covered historic estate like Le cucine di Masseria Spina.` },
+    rain:`Rain makes the stone streets incredibly slick. Swap the walking tour for a long, rustic indoor lunch at a covered historic estate like <b>Le cucine di Masseria Spina</b> <span class="rate">★ 4.8 · 304</span>.<span class="note"><b>Important:</b> Masseria Spina is mostly <b>dinner-only</b> (lunch usually Sundays only) — <b>call to confirm</b> before relying on it for a weekday lunch. A reliable weekday-lunch backup in Monopoli centro is <b>Il Quadrifoglio</b> <span class="rate">★ 4.6 · 882</span> — modern, indoor, stroller-friendly, famous "double-cooked" pizza (ask for Ricardo).<a class="maplink" target="_blank" rel="noopener" href="${M('Il Quadrifoglio Monopoli centro')}">📍 Maps</a></span>` },
   { n:7, dow:"Wed", date:"Jun 17", title:"Polignano a Mare", base:"Monopoli",
     cost:"€130",
-    route:`15-minute drive to <b>Polignano a Mare</b>. View the famous Lama Monachile cove from the balconies. Grab gelato at Il Super Mago del Gelo. Return for an afternoon nap, then spend the evening at Monopoli's old-town harbor.`,
+    route:`15-minute drive to <b>Polignano a Mare</b>. View the famous Lama Monachile cove from the balconies. Grab gelato at <b>Il Super Mago del Gelo</b> <span class="rate">★ 4.4 · 1,560</span> — the famous 1935 institution (try the signature <i>Caffè Speciale</i>), though service can be brusque. For the gelato itself, locals rate <b>Caruso Gelateria</b> <span class="rate">★ 4.5 · 1,884</span> a notch higher — creamy, friendly, ~€2.50 a cup. Return for an afternoon nap, then spend the evening at Monopoli's old-town harbor.`,
     place:"Lama Monachile Polignano a Mare",
-    food:`<b>Pescaria</b> (Polignano a Mare) — elite-tier seafood paninis and fried-fish cones served fast-casual, saving you from a long sit-down meal with a restless toddler.`,
+    food:`<b>Pescaria</b> (Polignano a Mare) <span class="rate">★ 4.3 · 15,201</span> — elite-tier seafood paninis and fried-fish cones served fast-casual, saving you from a long sit-down meal with a restless toddler.<span class="note"><b>Good to know:</b> wildly popular (15k+ reviews) — expect a queue at peak; order and grab a spot just off the main piazza. Fast-casual = ideal with a toddler.</span>`,
     foodMap:"Pescaria Polignano a Mare",
     rain:`Duck out of the rain at <b>Oppure – Kitchen House</b> in Polignano, an all-day brunch and bistro spot with a relaxed, family-friendly vibe.` },
   { n:8, dow:"Thu", date:"Jun 18", title:"Underground Caves at Castellana", base:"Monopoli",
@@ -372,7 +403,7 @@ const days = [
     cost:"€130",
     route:`Check out by <b>10:00</b>. Drive 15 minutes to <b>Zoosafari Fasano</b> — stay inside your rental car while giraffes and lions walk past the windows (a massive hit for a 2.5-year-old). Then 50 minutes to Bari: refuel and drop the car by <b>18:00</b> for your <b>20:00 flight</b>.`,
     place:"Zoosafari Fasano",
-    food:`<b>Bavarotti da Francesco</b> (Monopoli) — if your toddler is tired of pizza and pasta by Day 9, this family favorite serves great schnitzels and comfort food before the airport.`,
+    food:`<b>Bavarotti da Francesco</b> (Monopoli) <span class="rate">★ 4.9 · 506</span> — if your toddler is tired of pizza and pasta by Day 9, this family favorite serves great schnitzels and comfort food before the airport.<span class="note"><b>Good to know:</b> highest-rated of all your Monopoli options — Italian/Bavarian comfort food at reasonable prices, on Piazza S. Antonio (same square as Spaghetti d'Italia). Note the timing on a departure day: it's closed midday in places, so confirm it suits before the airport run, or treat it as the night-before dinner.</span>`,
     foodMap:"Bavarotti da Francesco Monopoli",
     rain:`The drive-through safari keeps you dry in the car! If the weather is truly miserable, head to Bari's covered indoor markets or go early to the airport terminal lounge.` },
 ];
@@ -413,6 +444,70 @@ days.forEach((d,i)=>{
   el.querySelector(".day-top").addEventListener("click", ()=> el.classList.toggle("open"));
   container.appendChild(el);
 });
+
+/* ---------- WEATHER (live, refreshes every time the page is opened) ---------- */
+const WX_LOC = { pc:{lat:40.26,lon:17.89,name:"Porto Cesareo"}, mono:{lat:40.95,lon:17.30,name:"Monopoli"} };
+const WX_DAYS = [
+  {n:1,dow:"Thu",date:"Jun 11",iso:"2026-06-11",loc:"pc"},
+  {n:2,dow:"Fri",date:"Jun 12",iso:"2026-06-12",loc:"pc"},
+  {n:3,dow:"Sat",date:"Jun 13",iso:"2026-06-13",loc:"pc"},
+  {n:4,dow:"Sun",date:"Jun 14",iso:"2026-06-14",loc:"pc"},
+  {n:5,dow:"Mon",date:"Jun 15",iso:"2026-06-15",loc:"mono"},
+  {n:6,dow:"Tue",date:"Jun 16",iso:"2026-06-16",loc:"mono"},
+  {n:7,dow:"Wed",date:"Jun 17",iso:"2026-06-17",loc:"mono"},
+  {n:8,dow:"Thu",date:"Jun 18",iso:"2026-06-18",loc:"mono"},
+  {n:9,dow:"Fri",date:"Jun 19",iso:"2026-06-19",loc:"mono"},
+];
+const WMO = {0:["☀️","Clear"],1:["🌤️","Mainly clear"],2:["⛅","Partly cloudy"],3:["☁️","Overcast"],45:["🌫️","Fog"],48:["🌫️","Fog"],51:["🌦️","Drizzle"],53:["🌦️","Drizzle"],55:["🌦️","Drizzle"],56:["🌧️","Icy drizzle"],57:["🌧️","Icy drizzle"],61:["🌧️","Light rain"],63:["🌧️","Rain"],65:["🌧️","Heavy rain"],66:["🌧️","Freezing rain"],67:["🌧️","Freezing rain"],71:["🌨️","Snow"],73:["🌨️","Snow"],75:["🌨️","Snow"],80:["🌦️","Showers"],81:["🌦️","Showers"],82:["⛈️","Heavy showers"],95:["⛈️","Thunderstorm"],96:["⛈️","Thunderstorm"],99:["⛈️","Thunderstorm"]};
+const wxBox = document.getElementById("wx");
+const wxStatus = document.getElementById("wx-status");
+
+async function loadWeather(){
+  try{
+    const entries = await Promise.all(Object.keys(WX_LOC).map(async k=>{
+      const {lat,lon}=WX_LOC[k];
+      const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}`
+        +`&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max`
+        +`&timezone=Europe/Rome&start_date=2026-06-11&end_date=2026-06-19`;
+      const r=await fetch(url); if(!r.ok) throw new Error("HTTP "+r.status);
+      return [k, await r.json()];
+    }));
+    renderWeather(Object.fromEntries(entries));
+  }catch(err){
+    wxBox.className="wx-loading";
+    wxBox.innerHTML=`Couldn't load the live forecast (${err.message}). Check your internet and reopen, or `
+      +`<a href="#" id="wx-retry" style="color:var(--terracotta-deep);font-weight:600">try again</a>.`;
+    const rt=document.getElementById("wx-retry");
+    if(rt) rt.addEventListener("click",e=>{e.preventDefault();wxBox.className="wx-loading";wxBox.textContent="Loading live forecast…";loadWeather();});
+  }
+}
+
+function renderWeather(data){
+  wxBox.className="wx-strip";
+  wxBox.innerHTML = WX_DAYS.map(d=>{
+    const src=data[d.loc], i=src.daily.time.indexOf(d.iso);
+    if(i<0) return `<div class="wx-day"><div class="wd">${d.n} · ${d.date.replace('Jun ','')}</div><div class="emoji">…</div><div class="lbl">no data yet</div></div>`;
+    const code=src.daily.weather_code[i];
+    const hi=Math.round(src.daily.temperature_2m_max[i]);
+    const lo=Math.round(src.daily.temperature_2m_min[i]);
+    const rain=src.daily.precipitation_probability_max[i] ?? 0;
+    const [emoji,label]=WMO[code]||["❓","—"];
+    const wet=rain>=40;
+    return `<div class="wx-day${wet?' wet':''}">
+      <div class="wd">${d.n} · ${d.dow} ${d.date.replace('Jun ','')}</div>
+      <div class="emoji" role="img" aria-label="${label}">${emoji}</div>
+      <div class="lbl">${label}</div>
+      <div class="temp">${hi}°<span class="lo"> / ${lo}°</span></div>
+      <div class="rain ${wet?'wet':'dry'}">💧 ${rain}%</div>
+      <div class="base">${WX_LOC[d.loc].name}</div>
+    </div>`;
+  }).join("");
+  const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  wxStatus.hidden=false;
+  wxStatus.innerHTML=`<span><span style="color:var(--olive)">●</span> Live · Open-Meteo · checked ${t} · refreshes each time you open this page.</span>`
+    +`<span>💧 Blue = ≥40% rain chance — glance at that day's bad-weather backup.</span>`;
+}
+loadWeather();
 </script>
 </body>
 </html>
