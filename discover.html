@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Discover Puglia · pictures &amp; guide</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='none' stroke='%23c9912f' stroke-width='6' stroke-linecap='round'><circle cx='50' cy='50' r='20' fill='%23e9a83b' stroke='%23bd5a35'/><line x1='50' y1='7' x2='50' y2='18'/><line x1='50' y1='82' x2='50' y2='93'/><line x1='7' y1='50' x2='18' y2='50'/><line x1='82' y1='50' x2='93' y2='50'/><line x1='19' y1='19' x2='28' y2='28'/><line x1='72' y1='72' x2='81' y2='81'/><line x1='81' y1='19' x2='72' y2='28'/><line x1='28' y1='72' x2='19' y2='81'/></g></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://upload.wikimedia.org" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..700&family=Hanken+Grotesk:wght@300..800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --cream:#f6efe1;--cream-2:#efe5d1;--paper:#fbf6ec;--ink:#2b2018;--ink-soft:#5d5043;
+    --terracotta:#bd5a35;--terracotta-deep:#9c4526;--olive:#6d7a47;--sea:#2f6f7e;--sea-deep:#1f5260;
+    --gold:#c9912f;--line:rgba(43,32,24,.14);--shadow:0 18px 40px -22px rgba(43,32,24,.45);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;font-family:"Hanken Grotesk",system-ui,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(47,111,126,.10), transparent 60%),
+      radial-gradient(900px 500px at -5% 20%, rgba(189,90,53,.10), transparent 55%),
+      var(--cream);
+    background-attachment:fixed;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;
+  }
+  .wrap{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 22px 90px;}
+
+  .backlink{
+    display:inline-flex;align-items:center;gap:7px;margin-top:26px;font-size:.86rem;font-weight:600;
+    color:var(--sea-deep);text-decoration:none;border:1px solid var(--line);background:var(--paper);
+    border-radius:999px;padding:8px 15px;box-shadow:0 8px 22px -20px rgba(43,32,24,.5);transition:border-color .2s,color .2s;
+  }
+  .backlink:hover{border-color:var(--terracotta-deep);color:var(--terracotta-deep);}
+
+  header.hero{padding:30px 0 12px;text-align:center;}
+  .eyebrow{font-size:.82rem;letter-spacing:.42em;text-transform:uppercase;color:var(--terracotta);font-weight:600;margin-bottom:16px;animation:rise .8s .05s both;}
+  .hero h1{font-family:"Fraunces",serif;font-optical-sizing:auto;font-weight:600;font-size:clamp(2.6rem,7vw,4.6rem);line-height:1;letter-spacing:-.015em;margin:0;animation:rise .9s .12s both;}
+  .hero h1 em{font-style:italic;color:var(--sea);font-weight:500;}
+  .hero .sub{margin:20px auto 0;max-width:620px;font-size:1.04rem;color:var(--ink-soft);animation:rise .9s .2s both;}
+
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin:54px 0 16px;}
+  .sec-head h2{font-family:"Fraunces",serif;font-weight:600;font-size:1.7rem;margin:0;letter-spacing:-.01em;}
+  .sec-head .rule{flex:1;height:1px;background:var(--line);}
+  .sec-head .count{font-size:.85rem;color:var(--ink-soft);}
+
+  /* ---------- PLACE CARDS ---------- */
+  .place{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);margin-top:18px;animation:rise .6s both;}
+  .place-photo{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,var(--cream-2),var(--cream));}
+  .place-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .place-cap{position:absolute;left:0;right:0;bottom:0;padding:46px 20px 14px;background:linear-gradient(transparent,rgba(20,12,6,.72));}
+  .place-cap h3{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(1.4rem,4vw,1.9rem);margin:0;color:#fff;letter-spacing:-.01em;line-height:1.05;}
+  .place-cap .ptag{font-size:.82rem;color:rgba(255,255,255,.9);margin-top:3px;}
+  .place-body{padding:8px 20px 16px;}
+  .block{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid rgba(43,32,24,.07);}
+  .block:last-of-type{border-bottom:none;}
+  .block .ico{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:1.05rem;}
+  .ico.story{background:rgba(201,145,47,.16);}
+  .ico.know{background:rgba(109,122,71,.16);}
+  .ico.fun{background:rgba(47,111,126,.13);}
+  .block .label{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:3px;}
+  .block p{margin:0;font-size:.97rem;}
+  .readmore{display:flex;flex-wrap:wrap;gap:9px;padding:14px 0 4px;}
+  .readmore a{font-size:.82rem;font-weight:600;color:var(--sea-deep);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 13px;background:var(--cream);display:inline-flex;gap:6px;align-items:center;transition:border-color .2s,color .2s;}
+  .readmore a:hover{border-color:var(--terracotta-deep);color:var(--terracotta-deep);}
+  .readmore a .ext{opacity:.6;font-size:.7rem;}
+
+  /* ---------- GLOSSARY ---------- */
+  .gloss-intro{color:var(--ink-soft);font-size:1rem;margin:0 0 4px;}
+  .gloss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px;margin-top:16px;}
+  .gterm{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 8px 22px -18px rgba(43,32,24,.5);display:flex;flex-direction:column;animation:rise .5s both;}
+  .gphoto{aspect-ratio:5/3;background:linear-gradient(135deg,var(--cream-2),var(--cream));}
+  .gphoto img{width:100%;height:100%;object-fit:cover;display:block;}
+  .gb{padding:12px 15px 14px;display:flex;flex-direction:column;gap:2px;flex:1;}
+  .gb h4{font-family:"Fraunces",serif;font-weight:600;margin:0;font-size:1.08rem;}
+  .gb .say{font-style:italic;color:var(--ink-soft);font-size:.76rem;}
+  .gb p{margin:5px 0 0;font-size:.88rem;color:var(--ink-soft);}
+  .gb a{margin-top:8px;font-size:.78rem;font-weight:600;color:var(--sea-deep);text-decoration:none;border-bottom:1px solid rgba(31,82,96,.35);align-self:flex-start;}
+  .gb a:hover{color:var(--terracotta-deep);border-color:var(--terracotta-deep);}
+
+  footer{text-align:center;margin-top:60px;color:var(--ink-soft);font-size:.85rem;}
+  footer .hr{height:1px;background:var(--line);margin:0 auto 22px;max-width:120px;}
+  footer .credit{font-size:.74rem;opacity:.85;margin-top:10px;}
+  footer a{color:var(--sea-deep);}
+
+  @keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="backlink" href="index.html">← Back to the itinerary</a>
+
+  <header class="hero">
+    <div class="eyebrow">A Pocket Guide · Puglia in Pictures</div>
+    <h1>Discover<br><em>Puglia</em></h1>
+    <p class="sub">The story behind every place on your week — with photos, a few words worth knowing, and a link to read more when you've got a moment and some signal.</p>
+  </header>
+
+  <section class="sec-head"><h2>The places</h2><span class="rule"></span><span class="count">region · areas · towns</span></section>
+  <div id="places"></div>
+
+  <section class="sec-head"><h2>Taste &amp; talk</h2><span class="rule"></span><span class="count">words worth knowing</span></section>
+  <p class="gloss-intro">A little glossary for menus and street signs — the dishes you'll keep seeing, and the everyday words that make Puglia tick.</p>
+  <div class="gloss-grid" id="glossary"></div>
+
+  <footer>
+    <div class="hr"></div>
+    Buon viaggio · made for the family
+    <div class="credit">Photos via <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> contributors · text links to Wikipedia &amp; official sites.</div>
+  </footer>
+
+</div>
+
+<script>
+const WIKI = t => "https://en.wikipedia.org/wiki/" + t;
+// onerror: if an image ever fails to load, hide its photo frame so no broken icon shows.
+const HIDE = "this.parentElement.style.display='none'";
+
+const places = [
+  { img:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Apulia_in_Italy.svg/960px-Apulia_in_Italy.svg.png",
+    title:"Puglia — the heel of Italy", tag:"The region · two seas, thousand-year olive country",
+    story:`Puglia is the long, sun-baked heel of the Italian boot, edged by two seas — the Ionian to the west and the Adriatic to the east. Over the centuries it was Greek, Roman, Byzantine, Norman and Swabian in turn, and each left its mark in the stone. Today it's Italy's olive-oil heartland, silver groves rolling between whitewashed towns — some of the trees over a thousand years old.`,
+    know:`Life runs late and slow. Many shops and sights close for <i>riposo</i> (roughly 13:30–17:00), and dinner rarely starts before 20:00. Evenings belong to the <i>passeggiata</i> — the whole town strolling before supper, toddlers and grandparents included.`,
+    fun:`Puglia presses 40–50% of all Italy's olive oil — more than any other region.`,
+    links:[["Wikipedia",WIKI("Apulia")],["Official tourism","https://www.viaggiareinpuglia.it/hp/en"]] },
+
+  { img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/The_heel_of_the_boot_of_Italy.jpeg/960px-The_heel_of_the_boot_of_Italy.jpeg",
+    title:"Salento — the tip of the heel", tag:"Around Porto Cesareo · Greek roots & the pizzica",
+    story:`Porto Cesareo sits in the Salento, the very point of the heel where the two seas almost meet. This was deep Greek territory once, and the roots run so far down that a Greek-derived dialect, <i>Griko</i>, is still spoken in a handful of inland villages. The Salento is also home to <i>pizzica</i>, the fast, hypnotic tarantella danced at summer festivals.`,
+    know:`Two coasts, two characters: your Ionian side has shallow, pale-sand, lagoon-like water that's ideal for little ones, while the Adriatic side is rockier and more dramatic.`,
+    fun:`Legend says the <i>pizzica</i> was once a "cure" for a tarantula's bite — you danced until the venom left you.`,
+    links:[["Wikipedia",WIKI("Salento")]] },
+
+  { img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Porto_Cesareo_4.jpg/960px-Porto_Cesareo_4.jpg",
+    title:"Porto Cesareo", tag:"Your first base · 11–15 June",
+    story:`A working fishing town wrapped around a protected marine reserve, with water so clear and pale it's nicknamed the "Caribbean of Salento." The squat watchtower on the headland is one of dozens strung along this coast in the 1500s to spot Saracen and Ottoman raiders far out at sea.`,
+    know:`The whole bay is a marine protected area — snorkelling is lovely, but leave shells, sand and sea life where they are. The dunes of Punta Prosciutto, just north, rank among Italy's finest beaches.`,
+    fun:`A little offshore islet, the <i>Isola dei Conigli</i> (Rabbit Island), is shallow enough to wade out to when the sea is calm and low.`,
+    links:[["Wikipedia",WIKI("Porto_Cesareo")]] },
+
+  { img:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Lecce_-_Santa_Croce_-_16.jpg/960px-Lecce_-_Santa_Croce_-_16.jpg",
+    title:"Lecce — the Florence of the South", tag:"Day trip · 14 June · the Baroque capital",
+    story:`Lecce is the Baroque capital of the south — a whole golden city carved from soft local limestone, <i>pietra leccese</i>. The stone is so workable that 17th-century masons smothered the façades in swirling stone flowers, saints and beasts. Beneath the main square lies a Roman amphitheatre that once held as many as 25,000 spectators.`,
+    know:`The showpiece is the Basilica di Santa Croce (pictured), an explosion of carved stone. The old town is flat and stroller-friendly — and the local treat is the <i>pasticciotto</i>, a warm custard-filled shortcrust born in this corner of Puglia.`,
+    fun:`Pietra leccese is soft enough to cut with a knife when freshly quarried — it only hardens once it meets the open air.`,
+    links:[["Wikipedia",WIKI("Lecce")]] },
+
+  { img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Ostuni_col_drone.jpg/960px-Ostuni_col_drone.jpg",
+    title:"Ostuni — the White City", tag:"Optional stop · 15 June · hilltop maze",
+    story:`Ostuni tumbles down its hilltop as a maze of blinding lime-washed houses, visible for miles across the olive plain. The whitewash was practical as much as pretty — lime was cheap, it brightened the dark alleys, and as a disinfectant it's credited with helping the town survive the plague.`,
+    know:`The lanes are steep, stepped and cobbled — a baby carrier beats a stroller here. The reward is the view from the cathedral terrace, out over a "sea of olives" to the Adriatic.`,
+    fun:`In a cave just outside town, archaeologists found "Delia" — the roughly 28,000-year-old skeleton of a pregnant woman, one of the oldest such burials ever discovered.`,
+    links:[["Wikipedia",WIKI("Ostuni")]] },
+
+  { img:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Valle_d%27Itria_Locorotondo.jpg/960px-Valle_d%27Itria_Locorotondo.jpg",
+    title:"The Valle d'Itria & the trulli", tag:"Monopoli's hinterland · valley of cone-roofed huts",
+    story:`Inland from Monopoli rolls the Valle d'Itria, a green patchwork of vineyards and olive groves studded with <i>trulli</i> — round whitewashed huts with conical dry-stone roofs, stacked without a drop of mortar. The famous story goes that they were built mortar-free so they could be pulled down in a hurry whenever the taxman came counting houses.`,
+    know:`The valley is dotted with <i>masserie</i> — old fortified farm estates, many now agriturismi and restaurants (yours included). Roads are narrow and winding; take them slowly.`,
+    fun:`Many roof-cones are crowned with a hand-carved stone pinnacle and painted with a white symbol — astrological, religious or magical — whose meanings are now mostly forgotten.`,
+    links:[["Wikipedia · the valley",WIKI("Itria_Valley")],["Wikipedia · trulli",WIKI("Trullo")]] },
+
+  { img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Alberobello_-_View_from_Piazza_Giangirolamo_II_-_03.jpg/960px-Alberobello_-_View_from_Piazza_Giangirolamo_II_-_03.jpg",
+    title:"Alberobello — capital of the trulli", tag:"Day trip · 16 June · UNESCO trulli town",
+    story:`Alberobello is the trulli city — over 1,500 of them packed into two old quarters, the busy Rione Monti and the quieter Rione Aia Piccola. It has been a UNESCO World Heritage Site since 1996.`,
+    know:`Go early — by mid-morning Rione Monti fills with coach tours and many trulli are now souvenir shops. Aia Piccola (your pick) stays residential and calm.`,
+    fun:`One trullo, the <i>Trullo Sovrano</i>, is the only two-storey trullo ever built.`,
+    links:[["Wikipedia",WIKI("Alberobello")],["UNESCO listing","https://whc.unesco.org/en/list/787"]] },
+
+  { img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/70044_Polignano_A_Mare_BA%2C_Italy_-_panoramio_%284%29.jpg/960px-70044_Polignano_A_Mare_BA%2C_Italy_-_panoramio_%284%29.jpg",
+    title:"Polignano a Mare", tag:"Day trip · 17 June · cliffs over the Adriatic",
+    story:`Polignano clings to white cliffs straight above the Adriatic, its old town honeycombed with sea caves. The signature sight is Lama Monachile — a tiny beach wedged in a ravine between the rock walls, under an old stone bridge.`,
+    know:`The best views are from the cliff-edge balconies and old-town terraces — but many edges are unfenced, so keep little hands held tight. Gelato and caffè cluster through the centro storico.`,
+    fun:`Polignano is the birthplace of Domenico Modugno, who wrote "Volare" — a bronze statue of him stands arms-flung-open on the seafront.`,
+    links:[["Wikipedia",WIKI("Polignano_a_Mare")]] },
+
+  { img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Vedutamonopoli2.jpg/960px-Vedutamonopoli2.jpg",
+    title:"Monopoli", tag:"Your second base · 15–19 June",
+    story:`Monopoli is a centuries-old Adriatic port — its name comes from the Greek for "single city." Behind a working harbour still full of bright wooden fishing boats, the old town piles up white houses, a 16th-century castle built for Charles V, and a richly Baroque cathedral.`,
+    know:`The old town is flat and walkable, with the harbour and the little Cala Porta Vecchia town beach right in the centre — gentle, toddler-friendly evenings.`,
+    fun:`Legend says the town's beloved icon of the Madonna arrived by sea on a raft in 1117, and its timber was used to roof the cathedral — Monopoli still celebrates it each December (and again in August).`,
+    links:[["Wikipedia",WIKI("Monopoli")]] },
+
+  { img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Castellana%27s_caves_wolf.jpg/960px-Castellana%27s_caves_wolf.jpg",
+    title:"Grotte di Castellana", tag:"Day trip · 18 June · caves underground",
+    story:`A spectacular three-kilometre system of underground caverns, fully explored only in 1938 by the speleologist Franco Anelli. Its deepest chamber, the dazzling Grotta Bianca (White Cave), is often called the most beautiful cave in the world.`,
+    know:`It holds a steady 15–18°C down there — bring a light layer even in June, and use the free baby-carrier hire, as strollers can't go below.`,
+    fun:`The entrance cavern, <i>La Grave</i>, is a 60-metre-deep sinkhole open to the sky — for centuries villagers used it as the local rubbish pit, never guessing what lay beyond.`,
+    links:[["Wikipedia",WIKI("Castellana_Caves")],["Official site","https://www.grottedicastellana.it/en/"]] },
+
+  { img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Bari_-_Lungomare_Imperatore_Augusto_%26_Mare.jpg/960px-Bari_-_Lungomare_Imperatore_Augusto_%26_Mare.jpg",
+    title:"Bari — the way home", tag:"Departure · 19 June · capital & airport",
+    story:`Puglia's lively capital and your gateway home. Its tangled old town, Bari Vecchia, wraps around the Basilica di San Nicola, which since 1087 has guarded the relics of Saint Nicholas — the bishop who became Santa Claus — drawing Catholic and Orthodox pilgrims alike.`,
+    know:`If you have a spare hour before the airport, Bari Vecchia is the place for it. Otherwise grab warm focaccia barese for the road — it's the city's signature.`,
+    fun:`In Bari Vecchia, women still make <i>orecchiette</i> by hand on tables in the street — one lane is known simply as "orecchiette street."`,
+    links:[["Wikipedia",WIKI("Bari")],["Basilica di San Nicola","https://www.basilicasannicola.it/"]] },
+];
+
+const glossary = [
+  { term:"Orecchiette", say:"oh-reh-KYET-teh", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Orecchiette_carbonara.jpg/330px-Orecchiette_carbonara.jpg",
+    def:`"Little ears" — Puglia's signature pasta, thumb-pressed by hand. The classic plate is <i>orecchiette con le cime di rapa</i> (with turnip tops).`, link:WIKI("Orecchiette") },
+  { term:"Burrata", say:"boo-RAH-tah", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Burrata2.jpg/330px-Burrata2.jpg",
+    def:`A pouch of fresh mozzarella filled with cream and soft curds — it spills when you cut it. Born just up the road in Andria.`, link:WIKI("Burrata") },
+  { term:"Focaccia barese", say:"foh-KAH-cha bah-REH-zeh", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Focaccia_with_Crumb.jpg/330px-Focaccia_with_Crumb.jpg",
+    def:`Bari's soft, oil-rich focaccia, dimpled and studded with cherry tomatoes, olives and oregano. The perfect grab-and-go.`, link:WIKI("Focaccia") },
+  { term:"Puccia", say:"POO-cha", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Puccia_con_le_olive_nere.jpg/330px-Puccia_con_le_olive_nere.jpg",
+    def:`A round Salento flatbread, split and stuffed like a sandwich — fast, cheap and mess-free. A great toddler lunch.`, link:"https://it.wikipedia.org/wiki/Puccia" },
+  { term:"Pasticciotto", say:"pas-tee-CHOT-toh", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Pasticciotto_filled_with_ricotta_cheese.jpg/330px-Pasticciotto_filled_with_ricotta_cheese.jpg",
+    def:`A warm little shortcrust pastry filled with custard (sometimes ricotta) — the Lecce-area breakfast, best straight from the oven.`, link:WIKI("Pasticciotto") },
+  { term:"Pizzica", say:"PEET-see-kah", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Pizzica.jpg/330px-Pizzica.jpg",
+    def:`The fast, spinning folk dance and music of the Salento — a form of <i>tarantella</i> you'll hear at summer festivals.`, link:WIKI("Pizzica") },
+  { term:"Trullo / trulli", say:"TROOL-loh", img:"",
+    def:`The cone-roofed dry-stone huts of the Valle d'Itria, built without mortar. One is a <i>trullo</i>; many are <i>trulli</i>.`, link:WIKI("Trullo") },
+  { term:"Agriturismo", say:"ah-gree-too-REEZ-moh", img:"",
+    def:`A stay on a working farm or estate — often with a pool, home cooking and space to roam. Your Monopoli base is one.`, link:WIKI("Agritourism") },
+  { term:"Masseria", say:"mas-seh-REE-ah", img:"",
+    def:`A fortified Puglian farm estate, centuries old. Many are now agriturismi and atmospheric restaurants.`, link:"" },
+  { term:"Lido", say:"LEE-doh", img:"",
+    def:`A beach club that rents umbrellas, sun-loungers and changing facilities — well worth it for shade with a toddler.`, link:"" },
+  { term:"Passeggiata", say:"pas-seh-JAH-tah", img:"",
+    def:`The leisurely evening stroll before dinner — the whole town out together. The gentlest way to fill the pre-dinner hour.`, link:WIKI("Passeggiata") },
+  { term:"Riposo", say:"ree-POH-zoh", img:"",
+    def:`The afternoon pause when many shops and sights shut (~13:30–17:00). Plan errands around it — and nap with the toddler.`, link:"" },
+  { term:"Coperto", say:"koh-PER-toh", img:"",
+    def:`A small per-person cover charge on the bill, for bread and the table — normal in Italy, not a tip. A euro or two each.`, link:"" },
+  { term:"Lama", say:"LAH-mah", img:"",
+    def:`A shallow dry ravine cut toward the sea — like Lama Monachile, the cove-beach at Polignano.`, link:"" },
+  { term:"Centro storico", say:"CHEN-troh STOH-ree-koh", img:"",
+    def:`The historic old-town core — usually the prettiest, most walkable part, and where the gelato hides.`, link:"" },
+];
+
+const ext = `<span class="ext">↗</span>`;
+const pWrap = document.getElementById("places");
+places.forEach((p,i)=>{
+  const el=document.createElement("article");
+  el.className="place";
+  el.style.animationDelay=(0.04+i*0.04)+"s";
+  el.innerHTML=`
+    <div class="place-photo">
+      <img src="${p.img}" alt="${p.title}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="${HIDE}">
+      <div class="place-cap"><h3>${p.title}</h3><div class="ptag">${p.tag}</div></div>
+    </div>
+    <div class="place-body">
+      <div class="block"><div class="ico story">📖</div><div><div class="label">The story</div><p>${p.story}</p></div></div>
+      <div class="block"><div class="ico know">💡</div><div><div class="label">Good to know</div><p>${p.know}</p></div></div>
+      <div class="block"><div class="ico fun">✨</div><div><div class="label">Did you know</div><p>${p.fun}</p></div></div>
+      <div class="readmore">${p.links.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t} ${ext}</a>`).join("")}</div>
+    </div>`;
+  pWrap.appendChild(el);
+});
+
+const gWrap=document.getElementById("glossary");
+glossary.forEach((g,i)=>{
+  const el=document.createElement("div");
+  el.className="gterm";
+  el.style.animationDelay=(0.03+i*0.03)+"s";
+  el.innerHTML=`
+    ${g.img?`<div class="gphoto"><img src="${g.img}" alt="${g.term}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="${HIDE}"></div>`:""}
+    <div class="gb">
+      <h4>${g.term}</h4>
+      <div class="say">${g.say}</div>
+      <p>${g.def}</p>
+      ${g.link?`<a href="${g.link}" target="_blank" rel="noopener">Read more ↗</a>`:""}
+    </div>`;
+  gWrap.appendChild(el);
+});
+</script>
+</body>
+</html>
