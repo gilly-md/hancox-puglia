@@ -182,6 +182,16 @@
   .note b{color:var(--terracotta-deep);}
   .alt{display:block;margin-top:8px;padding-top:8px;border-top:1px dotted var(--line);font-size:.92rem;}
   .alt .maplink{margin-top:0;margin-left:6px;font-size:.78rem;}
+  .pick{padding:9px 0;border-bottom:1px dotted var(--line);}
+  .pick:first-child{padding-top:2px;}
+  .pick:last-child{border-bottom:none;padding-bottom:0;}
+  .pick-h{display:flex;flex-wrap:wrap;align-items:center;gap:7px;}
+  .pick-tag{font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--sea-deep);background:rgba(47,111,126,.12);border-radius:999px;padding:2px 8px;}
+  .pick-tag.b{color:#8a6312;background:rgba(201,145,47,.16);}
+  .pick-b{margin:4px 0 0;font-size:.94rem;}
+  .pick-b .maplink{margin-top:0;margin-left:4px;font-size:.78rem;}
+  .pick-tip{margin:11px 0 0;font-size:.86rem;color:var(--ink-soft);}
+  .pick-tip .maplink{font-size:.78rem;margin-left:2px;}
 
   /* ---------- WEATHER ---------- */
   .wx-strip{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;}
@@ -282,10 +292,6 @@
         <span class="chev">›</span></summary>
       <div class="body">Message the boat-tour operator via Tripadvisor to reserve a toddler life jacket for the <b>09:00 departure on June 13</b>.</div>
     </details>
-    <details class="todo">
-      <summary><span class="num">3</span><span class="head">Mind the hotel cancellation windows</span>
-        <span class="chev">›</span></summary>
-      <div class="body">Free cancellation for <b>Agriturismo Tenuta Chianchizza</b> has already passed. <b>Hotel Posidonia's</b> window closes <b>June 5, 23:59</b>. The plan assumes we keep both bookings.</div>
     </details>
   </div>
 
@@ -347,64 +353,88 @@ const days = [
     cost:"€60",
     route:`Land at <b>11:30 AM</b>, pick up the car by <b>12:30</b>, then drive ~1h 45m to Porto Cesareo. Check in at Hotel Posidonia (opens 14:00), grab toddler essentials at a local <b>Conad</b> supermarket, and hit the local beach.`,
     place:"Porto Cesareo, Puglia",
-    food:`<b>Carmelo Osteria Tipica Salentina</b> <span class="rate">★ 4.3 · 12</span> — highly casual, budget-friendly and ultra-welcoming to families.<span class="note"><b>Good to know:</b> very few Google reviews (tiny sample) but TheFork rates it 8.2/10 — praised for friendly, fast service and live music on the back patio. Walk-in, no booking needed. Lean casual pizza/fritti rather than refined Salentine cooking.</span>`,
-    foodMap:"Carmelo Osteria Tipica Salentina Porto Cesareo",
+    picks:[
+      {tag:"Main", name:`Cento Ducati Trattoria`, rate:"★ 4.7 · 532", blurb:`Authentic, cozy Salento home cooking (orecchiette, local meatballs) — family-run and warm with kids; lively enough that toddler noise blends in. Walk-in. Replaces the old Carmelo pick (only 12 reviews).`, q:"Cento Ducati Trattoria Porto Cesareo"},
+      {tag:"Option B", name:`Pizzeria Parthenope 2.0`, rate:"★ 4.6 · 1,593", blurb:`Fast Neapolitan pizza on a pedestrian square; go ~19:00 to beat the queue.`, q:"Pizzeria Parthenope 2.0 Porto Cesareo"},
+    ],
     rain:`Skip the beach stroll. Head to the hotel to unpack and spend a cozy afternoon introducing your toddler to local pastries at a covered café in town.` },
   { n:2, dow:"Fri", date:"Jun 12", title:"Punta Prosciutto Beach & Stroll", base:"Porto Cesareo",
     cost:"€130",
     route:`15-minute drive north to <b>Punta Prosciutto</b>. Be on the sand by <b>09:00</b> to secure parking and a shaded lido spot. Head back by 13:00 for nap time. Evening <i>passeggiata</i> around Porto Cesareo's marina.`,
     place:"Punta Prosciutto beach",
-    food:`<b>Bacino Grande Restaurant</b> <span class="rate">★ 4.6 · 56</span> — great seafood right on the water, with space for a stroller.<span class="note"><b>Good to know:</b> it's actually in <b>Torre Lapillo</b> (just north of Punta Prosciutto), so it's handy for this beach day. Small review count, and some reviewers note prices run high for the quality — a lovely terrace setting more than a bargain.</span>`,
-    foodMap:"Bacino Grande Restaurant Torre Lapillo",
+    picks:[
+      {tag:"Main", name:`Lido Stella Maris`, rate:"★ 4.4 · 1,706", blurb:`Beachside pavilion on the sand at Torre Lapillo — eat where you already are, no packing the car. Shaded terrace, changing facilities. Ideal beach-day lunch.`, q:"Lido Stella Maris Torre Lapillo"},
+      {tag:"Option B", name:`Cento Ducati Trattoria`, rate:"★ 4.7 · 532", blurb:`Cozy, family-run Salento home cooking back in town for a proper dinner.`, q:"Cento Ducati Trattoria Porto Cesareo"},
+    ],
     rain:`Visit the <b>Marine Biology Museum</b> (Museo di Biologia Marina) in Porto Cesareo — small, but the colorful fish and sea-turtle displays easily captivate a toddler for an hour.` },
   { n:3, dow:"Sat", date:"Jun 13", title:"Marine Protected Area Boat Tour", base:"Porto Cesareo",
     cost:"€100",
     route:`Head to Porto Cesareo Marina by <b>08:30</b> for your pre-booked <b>09:00 boat tour</b>. Keep the afternoon entirely open for nap time and low-key beach/pool recovery.`,
     place:"Porto Cesareo Marina",
-    food:`<b>Pizzeria Parthenope 2.0</b> <span class="rate">★ 4.6 · 1,593</span> — exceptional, fast Neapolitan-style pizzas (fast service is a lifesaver with a tired toddler).<span class="note"><b>Good to know:</b> recent reviewers call it "good for families, early easy dinner" and "fast even when busy." The one risk is the queue if you turn up late — <b>go right at opening (~19:00)</b> and you'll sail through. Fair pricing (€8–16 a pizza).</span>`,
-    foodMap:"Pizzeria Parthenope 2.0 Porto Cesareo",
-    rain:`Boat tours cancel if the sea is rough. If so, take a 30-minute drive inland to <b>Nardò</b> to explore its stone loggias and have lunch at <b>Ristorante Germogli al Mignano</b> <span class="rate">★ 4.3 · 379</span>.<span class="note"><b>Heads-up:</b> this is a fine-dining rooftop (praised seafood/sushi), pricier and more formal than a trattoria — and rain shuts the terrace that's its main draw. Brilliant for a special dinner; for an easy wet-day toddler lunch a casual Nardò centro trattoria is comfier.</span>` },
+    picks:[
+      {tag:"Main", name:`Pizzeria Parthenope 2.0`, rate:"★ 4.6 · 1,593", blurb:`Fast, light Neapolitan pizzas — a lifesaver with a tired post-boat toddler. Go right at opening (~19:00). Pizzas €8–16.`, q:"Pizzeria Parthenope 2.0 Porto Cesareo"},
+      {tag:"Option B", name:`Cento Ducati Trattoria`, rate:"★ 4.7 · 532", blurb:`Keep it local and easy after the boat: cozy Salento home cooking.`, q:"Cento Ducati Trattoria Porto Cesareo"},
+    ],
+    rain:`Boat tours cancel if the sea is rough. If so, take a 30-minute drive inland to <b>Nardò</b> to explore its stone loggias and have lunch at <b>Ristorante Germogli al Mignano</b> <span class="rate">★ 4.3 · 379</span> <a class="maplink" target="_blank" rel="noopener" href="${M('Germogli al Mignano Nardo')}">📍 Maps</a>.<span class="note"><b>Heads-up:</b> this is a fine-dining rooftop (praised seafood/sushi), pricier and more formal than a trattoria — and rain shuts the terrace that's its main draw. Brilliant for a special dinner; for an easy wet-day toddler lunch a casual Nardò centro trattoria is comfier.</span>` },
   { n:4, dow:"Sun", date:"Jun 14", title:"Baroque Charm of Lecce", base:"Porto Cesareo",
     cost:"€110",
-    route:`40-minute drive inland to <b>Lecce</b>, arriving by 09:30. Stroll the flat, stroller-friendly old town. Grab a <i>pasticciotto</i> at <b>Caffè Alvino</b> <span class="rate">★ 4.2 · 5,152</span> in Piazza Sant'Oronzo, then head to the Villa Comunale gardens for the playground.`,
+    route:`40-minute drive inland to <b>Lecce</b>, arriving by 09:30. Stroll the flat, stroller-friendly old town. Grab a <i>pasticciotto</i> at <b>Caffè Alvino</b> <span class="rate">★ 4.2 · 5,152</span> <a class="maplink" target="_blank" rel="noopener" href="${M('Caffè Alvino Lecce')}">📍 Maps</a> in Piazza Sant'Oronzo, then head to the Villa Comunale gardens for the playground.`,
     place:"Lecce old town, Piazza Sant'Oronzo",
-    food:`<b>Antica Pucceria Giannone dal 1941</b> <span class="rate">★ 4.7 · 957</span> — traditional, easy-to-hold pocket sandwiches (<i>pucce</i>), followed by artisan gelato at <b>Baldo</b> <span class="rate">★ 4.6 · 1,038</span>.<span class="note"><b>Good to know:</b> Giannone is the best-rated stop of the day — go before 12:30 or take the <i>pucce</i> away (it's small, tight for a stroller). <b>Caffè Alvino</b> (the morning pastry stop) is iconic and genuinely good — recent reviews praise the pasticciotto, rustico and the staff — it just gets crowded at peak, so grab a table early or take it to go.</span>`,
-    foodMap:"Antica Pucceria Giannone Lecce",
+    picks:[
+      {tag:"Main", name:`L'angolino di Via Matteotti`, rate:"★ 4.5 · 1,885", blurb:`Lecce's iconic puccia (stuffed flatbread) — fast, cheap (~€8), mess-free; a perfect toddler lunch. Use the outside tables (tiny indoors).`, q:"L'angolino di Via Matteotti Lecce"},
+      {tag:"Also great", name:`Antica Pucceria Giannone`, rate:"★ 4.7 · 957", blurb:`Equally loved puccia institution — the original pick.`, q:"Antica Pucceria Giannone Lecce"},
+      {tag:"Option B", name:`Signuria`, rate:"★ 4.8 · 669", blurb:`Highest-rated Lecce sit-down: refined, modern, all-weather indoors for a proper meal.`, q:"Signuria Restaurant Lecce"},
+    ],
+    tip:`Afternoon gelato: <b>Baldo</b> (★ 4.6 · 1,038) <a class="maplink" target="_blank" rel="noopener" href="${M('Baldo Gelato Lecce')}">📍 Maps</a> — artisan, in the centro storico. (Morning pasticciotto at Caffè Alvino is in the route above.)`,
     rain:`<b>Museo dei Bambini</b> (Lecce Children's Museum) — a brilliant indoor space of interactive exhibits and sensory play areas tailored for ages 2–5.` },
   { n:5, dow:"Mon", date:"Jun 15", title:"Move Base via Ostuni", base:"→ Monopoli",
     cost:"€120",
     route:`Check out of Porto Cesareo by <b>10:00</b>. Drive 1h 15m to <b>Ostuni</b> (The White City) for an early lunch. <i>Tip: use a baby carrier — the hills are too steep for a stroller.</i> Then 35 minutes to Agriturismo Tenuta Chianchizza for a 16:00 check-in.`,
     place:"Ostuni, Puglia",
-    food:`<b>Trattoria Il Brigante</b> (Monopoli) <span class="rate">★ 4.5 · 1,576</span> — exceptionally welcoming staff and comforting, traditional dishes; standout fresh seafood (spaghettoni with red prawns, gnocchi with clams).<span class="note"><b>Good to know:</b> small and fills fast — <b>book ahead</b>, and it gets loud and cramped when full (lively, not a calm-toddler room). Ask for host Antonio.</span><span class="alt"><b>Calmer toddler option, same town:</b> <b>Bavarotti da Francesco</b> <span class="rate">★ 4.9 · 506</span> — schnitzel &amp; comfort food, about the easiest toddler dinner going.<a class="maplink" target="_blank" rel="noopener" href="${M('Bavarotti da Francesco Monopoli')}">📍 Maps</a></span>`,
-    foodMap:"Trattoria Il Brigante Monopoli",
+    picks:[
+      {tag:"Main", name:`Trattoria Il Brigante`, rate:"★ 4.5 · 1,576", blurb:`Warm stone trattoria, legendary hospitality; happily customises plain pasta for toddlers. Book ahead — small and lively (loud when full). Via Cavaliere.`, q:"Trattoria Il Brigante Monopoli"},
+      {tag:"Option B", name:`My Wine`, rate:"★ 4.8 · 397", blurb:`Superb, warm-service spot on the same street (Via Cavaliere); excellent seafood.`, q:"My Wine ristorante Monopoli"},
+      {tag:"Calmest", name:`Bavarotti da Francesco`, rate:"★ 4.9 · 506", blurb:`The easiest toddler night — schnitzel and comfort food.`, q:"Bavarotti da Francesco Monopoli"},
+    ],
     rain:`Skip the slippery stone hills of Ostuni. Drive directly to the Agriturismo, let your toddler settle into the triple room, and enjoy an extended indoor dinner at the estate's restaurant.` },
   { n:6, dow:"Tue", date:"Jun 16", title:"Alberobello Trulli Magic", base:"Monopoli",
     cost:"€110",
     route:`45-minute drive to <b>Alberobello</b>, arriving by <b>09:00</b> to beat the tour buses. Stick to the quieter Rione Aia Piccola neighborhood. Return to the Agriturismo by midday for a relaxed pool/farm afternoon.`,
     place:"Rione Aia Piccola Alberobello",
-    food:`<b>Spaghetti d'Italia</b> (Monopoli) <span class="rate">★ 4.8 · 1,958</span> — a great piazza (Piazza S. Antonio) with covered outdoor seating and excellent, toddler-approved fresh pastas.<span class="note"><b>Good to know:</b> top-rated and toddler-perfect (plain-pasta heaven). Right on the same square is <b>Bavarotti da Francesco</b> <span class="rate">★ 4.9 · 506</span> for schnitzel/comfort food — easy to choose between them on the day.</span>`,
-    foodMap:"Spaghetti d'Italia Monopoli",
-    rain:`Rain makes the stone streets incredibly slick. Swap the walking tour for a long, rustic indoor lunch at a covered historic estate like <b>Le cucine di Masseria Spina</b> <span class="rate">★ 4.8 · 304</span>.<span class="note"><b>Important:</b> Masseria Spina is mostly <b>dinner-only</b> (lunch usually Sundays only) — <b>call to confirm</b> before relying on it for a weekday lunch. A reliable weekday-lunch backup in Monopoli centro is <b>Il Quadrifoglio</b> <span class="rate">★ 4.6 · 882</span> — modern, indoor, stroller-friendly, famous "double-cooked" pizza (ask for Ricardo).<a class="maplink" target="_blank" rel="noopener" href="${M('Il Quadrifoglio Monopoli centro')}">📍 Maps</a></span>` },
+    picks:[
+      {tag:"Main", name:`Coppino`, rate:"★ 4.7 · 1,696", blurb:`In Alberobello — elite orecchiette and Puglian fare right on your trulli day, so you don't drive back hungry.`, q:"Coppino Alberobello"},
+      {tag:"Option B", name:`Spaghetti d'Italia`, rate:"★ 4.8 · 1,958", blurb:`Outstanding fresh pasta on Monopoli's Piazza S. Antonio for dinner near the base; toddler-perfect, covered terrace (Bavarotti ★ 4.9 is next door).`, q:"Spaghetti d'Italia Monopoli"},
+    ],
+    rain:`Rain makes the stone streets incredibly slick. Swap the walking tour for a long, rustic indoor lunch at a covered historic estate like <b>Le cucine di Masseria Spina</b> <span class="rate">★ 4.8 · 304</span> <a class="maplink" target="_blank" rel="noopener" href="${M('Le Cucine di Masseria Spina Monopoli')}">📍 Maps</a>.<span class="note"><b>Important:</b> Masseria Spina is mostly <b>dinner-only</b> (lunch usually Sundays only) — <b>call to confirm</b> before relying on it for a weekday lunch. A reliable weekday-lunch backup in Monopoli centro is <b>Il Quadrifoglio</b> <span class="rate">★ 4.6 · 882</span> — modern, indoor, stroller-friendly, famous "double-cooked" pizza (ask for Ricardo).<a class="maplink" target="_blank" rel="noopener" href="${M('Il Quadrifoglio Monopoli centro')}">📍 Maps</a></span>` },
   { n:7, dow:"Wed", date:"Jun 17", title:"Polignano a Mare", base:"Monopoli",
     cost:"€130",
-    route:`15-minute drive to <b>Polignano a Mare</b>. View the famous Lama Monachile cove from the balconies. Grab gelato at <b>Il Super Mago del Gelo</b> <span class="rate">★ 4.4 · 1,560</span> — the famous 1935 institution (try the signature <i>Caffè Speciale</i>), though service can be brusque. For the gelato itself, locals rate <b>Caruso Gelateria</b> <span class="rate">★ 4.5 · 1,884</span> a notch higher — creamy, friendly, ~€2.50 a cup. Return for an afternoon nap, then spend the evening at Monopoli's old-town harbor.`,
+    route:`15-minute drive to <b>Polignano a Mare</b>. View the famous Lama Monachile cove from the balconies. Grab gelato at <b>Il Super Mago del Gelo</b> <span class="rate">★ 4.4 · 1,560</span> <a class="maplink" target="_blank" rel="noopener" href="${M('Il Super Mago del Gelo Polignano a Mare')}">📍 Maps</a> — the famous 1935 institution (try the signature <i>Caffè Speciale</i>), though service can be brusque. For the gelato itself, locals rate <b>Caruso Gelateria</b> <span class="rate">★ 4.5 · 1,884</span> <a class="maplink" target="_blank" rel="noopener" href="${M('Caruso Gelateria Polignano a Mare')}">📍 Maps</a> a notch higher — creamy, friendly, ~€2.50 a cup. Return for an afternoon nap, then spend the evening at Monopoli's old-town harbor.`,
     place:"Lama Monachile Polignano a Mare",
-    food:`<b>Pescaria</b> (Polignano a Mare) <span class="rate">★ 4.3 · 15,201</span> — elite-tier seafood paninis and fried-fish cones served fast-casual, saving you from a long sit-down meal with a restless toddler.<span class="note"><b>Good to know:</b> wildly popular (15k+ reviews) — expect a queue at peak; order and grab a spot just off the main piazza. Fast-casual = ideal with a toddler.</span>`,
-    foodMap:"Pescaria Polignano a Mare",
+    picks:[
+      {tag:"Main", name:`Il Quadrifoglio (Polignano)`, rate:"★ 4.6 · 2,226", blurb:`Famous 72-hour pizza dough and Spaghetti all'Assassina; AC indoors. Very popular — arrive 19:30 sharp. (A bigger, different restaurant from the Monopoli one.)`, q:"Il Quadrifoglio Polignano a Mare"},
+      {tag:"Option B", name:`Calapà`, rate:"★ 4.7 · 366", blurb:`Seafront Polignano dining — fresh de-boned fish, stunning coastal views.`, q:"Calapà Polignano a Mare"},
+      {tag:"Quick lunch", name:`Pescaria`, rate:"★ 4.3 · 15,201", blurb:`Fast gourmet seafood paninis for a quick toddler lunch — queue at peak, go at 12:00.`, q:"Pescaria Polignano a Mare"},
+    ],
     rain:`Duck out of the rain at <b>Oppure – Kitchen House</b> in Polignano, an all-day brunch and bistro spot with a relaxed, family-friendly vibe.` },
   { n:8, dow:"Thu", date:"Jun 18", title:"Underground Caves at Castellana", base:"Monopoli",
     cost:"€140",
     route:`30-minute drive inland to <b>Grotte di Castellana</b>. Take the short 50-minute (1 km) tour — a cool 16–18°C underground, a perfect escape from the June heat. Use the free baby-carrier hire on-site. Afternoon open for a final pool session.`,
     place:"Grotte di Castellana",
-    food:`A special farewell dinner directly at your accommodation, <b>Agriturismo Tenuta Chianchizza</b>.`,
-    foodMap:"Agriturismo Tenuta Chianchizza",
+    picks:[
+      {tag:"Main", name:`Le Cucine di Masseria Spina`, rate:"★ 4.8 · 304", blurb:`A 500-year-old farm estate — vaulted halls, lawn space and a kids' play area (the toddler jackpot). Refined local seafood and meats. Reserve; mostly dinner service.`, q:"Le Cucine di Masseria Spina Monopoli"},
+      {tag:"Option B", name:`Carlo Quinto`, rate:"★ 4.4 · 2,065", blurb:`Grand stone halls on Monopoli's sea wall — sea views, easy stroller access.`, q:"CarloQuinto Monopoli"},
+    ],
+    tip:`Easiest option on a rest day: just dine in at your own <b>Agriturismo Tenuta Chianchizza</b>.`,
     rain:`The caves are underground and completely dry — this day is perfectly weather-proof as it is!` },
   { n:9, dow:"Fri", date:"Jun 19", title:"Drive-Through Safari & Home", base:"Departure",
     cost:"€130",
     route:`Check out by <b>10:00</b>. Drive 15 minutes to <b>Zoosafari Fasano</b> — stay inside your rental car while giraffes and lions walk past the windows (a massive hit for a 2.5-year-old). Then 50 minutes to Bari: refuel and drop the car by <b>18:00</b> for your <b>20:00 flight</b>.`,
     place:"Zoosafari Fasano",
-    food:`<b>Bavarotti da Francesco</b> (Monopoli) <span class="rate">★ 4.9 · 506</span> — if your toddler is tired of pizza and pasta by Day 9, this family favorite serves great schnitzels and comfort food before the airport.<span class="note"><b>Good to know:</b> highest-rated of all your Monopoli options — Italian/Bavarian comfort food at reasonable prices, on Piazza S. Antonio (same square as Spaghetti d'Italia). Note the timing on a departure day: it's closed midday in places, so confirm it suits before the airport run, or treat it as the night-before dinner.</span>`,
-    foodMap:"Bavarotti da Francesco Monopoli",
+    picks:[
+      {tag:"Main", name:`Panificio Fiore`, rate:"★ 4.6 · 3,658", blurb:`Bari — legendary focaccia barese, fast and portable; grab a warm slice for the airport run. Almost no seating, pure grab-and-go — perfect for a tight departure day.`, q:"Panificio Fiore Bari"},
+      {tag:"Also great", name:`Bakery Santa Rita`, rate:"★ 4.8 · 4,828", blurb:`Rival focaccia king in Bari Vecchia if Fiore's queue is long.`, q:"Bakery Santa Rita Bari"},
+      {tag:"Option B", name:`Bavarotti da Francesco`, rate:"★ 4.9 · 506", blurb:`If there's time for a sit-down: schnitzel and comfort food, a break from pizza/pasta (confirm midday hours).`, q:"Bavarotti da Francesco Monopoli"},
+    ],
     rain:`The drive-through safari keeps you dry in the car! If the weather is truly miserable, head to Bari's covered indoor markets or go early to the airport terminal lounge.` },
 ];
 
@@ -434,8 +464,9 @@ days.forEach((d,i)=>{
         <a class="maplink" target="_blank" rel="noopener" href="${M(d.place)}">${pin} ${d.place} · open in Maps</a>
       </div></div>
       <div class="block"><div class="ico food">🍝</div><div>
-        <div class="label">Where to eat</div><p>${d.food}</p>
-        <a class="maplink" target="_blank" rel="noopener" href="${M(d.foodMap)}">${pin} Find on Maps</a>
+        <div class="label">Where to eat</div>
+        ${d.picks.map(p=>`<div class="pick"><div class="pick-h"><span class="pick-tag${p.tag==='Option B'?' b':''}">${p.tag}</span> <b>${p.name}</b> <span class="rate">${p.rate}</span></div><p class="pick-b">${p.blurb} <a class="maplink" target="_blank" rel="noopener" href="${M(p.q)}">${pin} Maps</a></p></div>`).join("")}
+        ${d.tip?`<p class="pick-tip">${d.tip}</p>`:""}
       </div></div>
       <div class="block rain"><div class="ico rain">🌧️</div><div>
         <div class="label">Bad-weather backup</div><p>${d.rain}</p>
@@ -475,17 +506,20 @@ async function loadWeather(){
     renderWeather(Object.fromEntries(entries));
   }catch(err){
     wxBox.className="wx-loading";
-    wxBox.innerHTML=`Couldn't load the live forecast (${err.message}). Check your internet and reopen, or `
-      +`<a href="#" id="wx-retry" style="color:var(--terracotta-deep);font-weight:600">try again</a>.`;
-    const rt=document.getElementById("wx-retry");
-    if(rt) rt.addEventListener("click",e=>{e.preventDefault();wxBox.className="wx-loading";wxBox.textContent="Loading live forecast…";loadWeather();});
+    wxBox.textContent="Couldn't load the live forecast. Check your internet and reopen, or ";
+    const rt=document.createElement("a");
+    rt.href="#"; rt.textContent="try again";
+    rt.style.color="var(--terracotta-deep)"; rt.style.fontWeight="600";
+    rt.addEventListener("click",e=>{e.preventDefault();wxBox.className="wx-loading";wxBox.textContent="Loading live forecast…";loadWeather();});
+    wxBox.appendChild(rt);
   }
 }
 
 function renderWeather(data){
   wxBox.className="wx-strip";
   wxBox.innerHTML = WX_DAYS.map(d=>{
-    const src=data[d.loc], i=src.daily.time.indexOf(d.iso);
+    const src=data[d.loc];
+    const i=(src&&src.daily&&src.daily.time)?src.daily.time.indexOf(d.iso):-1;
     if(i<0) return `<div class="wx-day"><div class="wd">${d.n} · ${d.date.replace('Jun ','')}</div><div class="emoji">…</div><div class="lbl">no data yet</div></div>`;
     const code=src.daily.weather_code[i];
     const hi=Math.round(src.daily.temperature_2m_max[i]);
