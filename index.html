@@ -151,6 +151,8 @@
   .chip{font-size:.74rem;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--cream);display:flex;gap:5px;align-items:center;}
   .chip.base{background:rgba(109,122,71,.14);border-color:rgba(109,122,71,.35);color:#4d5733;}
   .chip.cost{background:rgba(201,145,47,.16);border-color:rgba(201,145,47,.4);color:#7a5610;font-weight:600;}
+  .chip.wx{background:rgba(47,111,126,.1);border-color:rgba(47,111,126,.32);color:var(--sea-deep);font-weight:600;}
+  .chip.wx.wet{background:rgba(47,111,126,.2);border-color:rgba(47,111,126,.5);}
   .day-toggle{
     flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);
     background:var(--cream);display:grid;place-items:center;color:var(--sea);
@@ -163,6 +165,7 @@
   .day.open .detail-wrap{grid-template-rows:1fr;}
   .detail{overflow:hidden;}
   .detail-inner{padding:2px 20px 22px;border-top:1px dashed var(--line);}
+  .daynote{font-size:.9rem;background:rgba(201,145,47,.13);border:1px solid rgba(201,145,47,.32);border-radius:11px;padding:10px 13px;margin:10px 0 2px;color:var(--ink);}
   .block{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid rgba(43,32,24,.07);}
   .block:last-child{border-bottom:none;}
   .block .ico{
@@ -379,14 +382,24 @@
   <section class="sec-head"><h2>Reservations to lock in</h2><span class="rule"></span><span class="count">booking tips</span></section>
   <div class="tips">
     <div class="tip"><span class="when">2–3 days ahead</span><div><b>Grotte di Castellana</b><p>Buy tickets online for June 18 to lock in a morning slot — same-day tickets frequently sell out.</p></div></div>
-    <div class="tip"><span class="when">1–2 days ahead</span><div><b>Beach lidos</b><p>WhatsApp a beach club at Punta Prosciutto (Lido Oasis or Lido Teranga) before June 12 to guarantee an umbrella and chairs in the shade.</p></div></div>
+    <div class="tip"><span class="when">1–2 days ahead</span><div><b>Beach lidos</b><p>WhatsApp a beach club at Punta Prosciutto (Lido Oasis or Lido Teranga) before June 14 to guarantee an umbrella and chairs in the shade.</p></div></div>
     <div class="tip"><span class="when">A few days ahead</span><div><b>Zoosafari Fasano</b><p>Buy tickets online to bypass the gate queues, which back up in the morning sun.</p></div></div>
     <div class="tip"><span class="when">1 day ahead</span><div><b>High-demand restaurants</b><p>Have your hosts call ahead to secure a kid-friendly table (around 19:30–20:00 when doors open).</p></div></div>
+  </div>
+
+  <!-- EMERGENCY & ESSENTIALS -->
+  <section class="sec-head"><h2>Emergency &amp; essentials</h2><span class="rule"></span><span class="count">keep handy</span></section>
+  <div class="tips">
+    <div class="tip"><span class="when">Emergency</span><div><b>112</b><p>The single EU emergency line (police · ambulance · fire), with English-speaking operators. For a medical emergency ask for an <i>ambulanza</i>.</p></div></div>
+    <div class="tip"><span class="when">Base · 11–15</span><div><b>Hotel Posidonia, Porto Cesareo</b><p><i>[add the address &amp; reception number from your booking]</i> — front desk is your first call for a doctor or anything local.</p></div></div>
+    <div class="tip"><span class="when">Base · 15–19</span><div><b>Agriturismo Tenuta Chianchizza, Monopoli</b><p><i>[add the address &amp; host number from your booking]</i> — the hosts can call ahead or help in an emergency.</p></div></div>
+    <div class="tip"><span class="when">Pharmacy</span><div><b>Farmacia</b><p>Look for the green cross; typically open ~08:30–13:00 and 16:30–20:00. After hours, the door lists the nearest <i>farmacia di turno</i> (on-call). A <i>guardia medica</i> covers night/holiday calls.</p></div></div>
   </div>
 
   <footer>
     <div class="hr"></div>
     Buon viaggio · Porto Cesareo → Lecce → Ostuni → Alberobello → Polignano → Bari
+    <div class="credit" style="font-size:.74rem;opacity:.85;margin-top:10px">Restaurant ★ ratings &amp; review counts are Google snapshots (≈ June 2026), indicative not live — glance again on the day. Weather is live.</div>
   </footer>
 
 </div>
@@ -399,30 +412,13 @@ const days = [
     route:`Land at <b>11:30 AM</b>, pick up the car by <b>12:30</b>, then drive ~1h 45m to Porto Cesareo. Check in at Hotel Posidonia (opens 14:00), grab toddler essentials at a local <b>Conad</b> supermarket, and hit the local beach.`,
     place:"Porto Cesareo, Puglia",
     picks:[
-      {tag:"Main", name:`Cento Ducati Trattoria`, rate:"★ 4.7 · 532", blurb:`Authentic, cozy Salento home cooking (orecchiette, local meatballs) — family-run and warm with kids; lively enough that toddler noise blends in. Walk-in. Replaces the old Carmelo pick (only 12 reviews).`, q:"Cento Ducati Trattoria Porto Cesareo"},
-      {tag:"Option B", name:`Pizzeria Parthenope 2.0`, rate:"★ 4.6 · 1,593", blurb:`Fast Neapolitan pizza on a pedestrian square; go ~19:00 to beat the queue.`, q:"Pizzeria Parthenope 2.0 Porto Cesareo"},
+      {tag:"Main", name:`Cento Ducati Trattoria`, rate:"★ 4.8 · 537", blurb:`Authentic, cozy Salento home cooking (orecchiette, local meatballs) — family-run and warm with kids; lively enough that toddler noise blends in. Walk-in. Replaces the old Carmelo pick (only 12 reviews).`, q:"Cento Ducati Trattoria Porto Cesareo"},
+      {tag:"Option B", name:`Pizzeria Parthenope 2.0`, rate:"★ 4.5 · 1,594", blurb:`Fast Neapolitan pizza on a pedestrian square; go ~19:00 to beat the queue.`, q:"Pizzeria Parthenope 2.0 Porto Cesareo"},
     ],
     rain:`Skip the beach stroll. Head to the hotel to unpack and spend a cozy afternoon introducing your toddler to local pastries at a covered café in town.` },
-  { n:2, dow:"Fri", date:"Jun 12", title:"Punta Prosciutto Beach & Stroll", base:"Porto Cesareo",
-    cost:"€130",
-    route:`15-minute drive north to <b>Punta Prosciutto</b>. Be on the sand by <b>09:00</b> to secure parking and a shaded lido spot. Head back by 13:00 for nap time. Evening <i>passeggiata</i> around Porto Cesareo's marina.`,
-    place:"Punta Prosciutto beach",
-    picks:[
-      {tag:"Main", name:`Lido Stella Maris`, rate:"★ 4.4 · 1,706", blurb:`Beachside pavilion on the sand at Torre Lapillo — eat where you already are, no packing the car. Shaded terrace, changing facilities. Ideal beach-day lunch.`, q:"Lido Stella Maris Torre Lapillo"},
-      {tag:"Option B", name:`Cento Ducati Trattoria`, rate:"★ 4.7 · 532", blurb:`Cozy, family-run Salento home cooking back in town for a proper dinner.`, q:"Cento Ducati Trattoria Porto Cesareo"},
-    ],
-    rain:`Visit the <b>Marine Biology Museum</b> (Museo di Biologia Marina) in Porto Cesareo — small, but the colorful fish and sea-turtle displays easily captivate a toddler for an hour.` },
-  { n:3, dow:"Sat", date:"Jun 13", title:"Marine Protected Area Boat Tour", base:"Porto Cesareo",
-    cost:"€100",
-    route:`Head to Porto Cesareo Marina by <b>08:30</b> for your pre-booked <b>09:00 boat tour</b>. Keep the afternoon entirely open for nap time and low-key beach/pool recovery.`,
-    place:"Porto Cesareo Marina",
-    picks:[
-      {tag:"Main", name:`Pizzeria Parthenope 2.0`, rate:"★ 4.6 · 1,593", blurb:`Fast, light Neapolitan pizzas — a lifesaver with a tired post-boat toddler. Go right at opening (~19:00). Pizzas €8–16.`, q:"Pizzeria Parthenope 2.0 Porto Cesareo"},
-      {tag:"Option B", name:`Cento Ducati Trattoria`, rate:"★ 4.7 · 532", blurb:`Keep it local and easy after the boat: cozy Salento home cooking.`, q:"Cento Ducati Trattoria Porto Cesareo"},
-    ],
-    rain:`Boat tours cancel if the sea is rough. If so, take a 30-minute drive inland to <b>Nardò</b> to explore its stone loggias and have lunch at <b>Ristorante Germogli al Mignano</b> <span class="rate">★ 4.3 · 379</span> <a class="maplink" target="_blank" rel="noopener" href="${M('Germogli al Mignano Nardo')}">📍 Maps</a>.<span class="note"><b>Heads-up:</b> this is a fine-dining rooftop (praised seafood/sushi), pricier and more formal than a trattoria — and rain shuts the terrace that's its main draw. Brilliant for a special dinner; for an easy wet-day toddler lunch a casual Nardò centro trattoria is comfier.</span>` },
-  { n:4, dow:"Sun", date:"Jun 14", title:"Baroque Charm of Lecce", base:"Porto Cesareo",
+  { n:2, dow:"Fri", date:"Jun 12", title:"Baroque Charm of Lecce", base:"Porto Cesareo",
     cost:"€110",
+    note:`☔ Swapped from the beach day — Jun 12 forecasts thunderstorms, and Lecce's covered old town shrugs off rain.`,
     route:`40-minute drive inland to <b>Lecce</b>, arriving by 09:30. Stroll the flat, stroller-friendly old town. Grab a <i>pasticciotto</i> at <b>Caffè Alvino</b> <span class="rate">★ 4.2 · 5,152</span> <a class="maplink" target="_blank" rel="noopener" href="${M('Caffè Alvino Lecce')}">📍 Maps</a> in Piazza Sant'Oronzo, then head to the Villa Comunale gardens for the playground.`,
     place:"Lecce old town, Piazza Sant'Oronzo",
     picks:[
@@ -432,6 +428,25 @@ const days = [
     ],
     tip:`Afternoon gelato: <b>Baldo</b> (★ 4.6 · 1,038) <a class="maplink" target="_blank" rel="noopener" href="${M('Baldo Gelato Lecce')}">📍 Maps</a> — artisan, in the centro storico. (Morning pasticciotto at Caffè Alvino is in the route above.)`,
     rain:`<b>Museo dei Bambini</b> (Lecce Children's Museum) — a brilliant indoor space of interactive exhibits and sensory play areas tailored for ages 2–5.` },
+  { n:3, dow:"Sat", date:"Jun 13", title:"Marine Protected Area Boat Tour", base:"Porto Cesareo",
+    cost:"€100",
+    route:`Head to Porto Cesareo Marina by <b>08:30</b> for your pre-booked <b>09:00 boat tour</b>. Keep the afternoon entirely open for nap time and low-key beach/pool recovery.`,
+    place:"Porto Cesareo Marina",
+    picks:[
+      {tag:"Main", name:`Pizzeria Parthenope 2.0`, rate:"★ 4.5 · 1,594", blurb:`Fast, light Neapolitan pizzas — a lifesaver with a tired post-boat toddler. Go right at opening (~19:00). Pizzas €8–16.`, q:"Pizzeria Parthenope 2.0 Porto Cesareo"},
+      {tag:"Option B", name:`Cento Ducati Trattoria`, rate:"★ 4.8 · 537", blurb:`Keep it local and easy after the boat: cozy Salento home cooking.`, q:"Cento Ducati Trattoria Porto Cesareo"},
+    ],
+    rain:`Boat tours cancel if the sea is rough. If so, take a 30-minute drive inland to <b>Nardò</b> to explore its stone loggias and have lunch at <b>Ristorante Germogli al Mignano</b> <span class="rate">★ 4.3 · 379</span> <a class="maplink" target="_blank" rel="noopener" href="${M('Germogli al Mignano Nardo')}">📍 Maps</a>.<span class="note"><b>Heads-up:</b> this is a fine-dining rooftop (praised seafood/sushi), pricier and more formal than a trattoria — and rain shuts the terrace that's its main draw. Brilliant for a special dinner; for an easy wet-day toddler lunch a casual Nardò centro trattoria is comfier.</span>` },
+  { n:4, dow:"Sun", date:"Jun 14", title:"Punta Prosciutto Beach & Stroll", base:"Porto Cesareo",
+    cost:"€130",
+    note:`☀️ Swapped in from Jun 12 — this is the clear, calm beach day. Book your lido a day or two ahead.`,
+    route:`15-minute drive north to <b>Punta Prosciutto</b>. Be on the sand by <b>09:00</b> to secure parking and a shaded lido spot. Head back by 13:00 for nap time. Evening <i>passeggiata</i> around Porto Cesareo's marina.`,
+    place:"Punta Prosciutto beach",
+    picks:[
+      {tag:"Main", name:`Lido Stella Maris`, rate:"★ 4.4 · 1,706", blurb:`Beachside pavilion on the sand at Torre Lapillo — eat where you already are, no packing the car. Shaded terrace, changing facilities. Ideal beach-day lunch.`, q:"Lido Stella Maris Torre Lapillo"},
+      {tag:"Option B", name:`Cento Ducati Trattoria`, rate:"★ 4.8 · 537", blurb:`Cozy, family-run Salento home cooking back in town for a proper dinner.`, q:"Cento Ducati Trattoria Porto Cesareo"},
+    ],
+    rain:`Visit the <b>Marine Biology Museum</b> (Museo di Biologia Marina) in Porto Cesareo — small, but the colorful fish and sea-turtle displays easily captivate a toddler for an hour.` },
   { n:5, dow:"Mon", date:"Jun 15", title:"Move Base — Torre Guaceto or Ostuni", base:"→ Monopoli",
     cost:"€120",
     route:`Check out of Porto Cesareo by <b>10:00</b> and break the drive with <b>one</b> stop:<br><b>Option A — Torre Guaceto</b> (~1h–1h15 from Porto Cesareo): a WWF marine reserve — calm shallow sea, boardwalks and a sea-turtle recovery centre; the toddler-easy choice. Then ~40 min to the Agriturismo. <i>[verify summer beach access — may be car-park + eco-shuttle]</i><br><b>Option B — Ostuni</b>, the White City (~1h15): a dramatic hilltop old town — <i>use a baby carrier, the lanes are steep</i> <a class="maplink" target="_blank" rel="noopener" href="${M('Ostuni centro storico')}">📍 Ostuni map</a>. Then ~35 min to the Agriturismo.<br><i>Either way, be back in the car by ~13:30 so she naps on the final leg; check-in from 16:00.</i>`,
@@ -465,7 +480,7 @@ const days = [
     rain:`Duck out of the rain at <b>Oppure – Kitchen House</b> in Polignano, an all-day brunch and bistro spot with a relaxed, family-friendly vibe.` },
   { n:8, dow:"Thu", date:"Jun 18", title:"Underground Caves at Castellana", base:"Monopoli",
     cost:"€140",
-    route:`30-minute drive inland to <b>Grotte di Castellana</b>. Take the short 50-minute (1 km) tour — a cool 16–18°C underground, a perfect escape from the June heat. Use the free baby-carrier hire on-site. Afternoon open for a final pool session.`,
+    route:`30-minute drive inland to <b>Grotte di Castellana</b>. Take the short 50-minute (1 km) tour — a cool 15–18°C underground, a perfect escape from the June heat. Use the free baby-carrier hire on-site. Afternoon open for a final pool session.`,
     place:"Grotte di Castellana",
     picks:[
       {tag:"Main", name:`Le Cucine di Masseria Spina`, rate:"★ 4.8 · 304", blurb:`A 500-year-old farm estate — vaulted halls, lawn space and a kids' play area (the toddler jackpot). Refined local seafood and meats. Reserve; mostly dinner service.`, q:"Le Cucine di Masseria Spina Monopoli"},
@@ -509,6 +524,7 @@ days.forEach((d,i)=>{
       <div class="day-main">
         <h3>${d.title}</h3>
         <div class="chips">
+          <span class="chip wx" id="wxchip${d.n}" hidden></span>
           <span class="chip base">📍 ${d.base}</span>
           <span class="chip cost">${d.cost} / day</span>
         </div>
@@ -516,6 +532,7 @@ days.forEach((d,i)=>{
       <div class="day-toggle" aria-hidden="true">${plus}</div>
     </div>
     <div class="detail-wrap" id="dpanel${d.n}"><div class="detail"><div class="detail-inner">
+      ${d.note?`<div class="daynote">${d.note}</div>`:""}
       <div class="block"><div class="ico route">🧭</div><div>
         <div class="label">Route &amp; timeline</div><p>${d.route}</p>
         <a class="maplink" target="_blank" rel="noopener" href="${M(d.place)}">${pin} ${d.place} · open in Maps</a>
@@ -550,7 +567,7 @@ const guide = [
     know:`The whole bay is a <b>marine protected area</b> — snorkelling is lovely, but leave shells, sand and sea life where they are. The dunes of Punta Prosciutto, just north, rank among Italy's finest beaches.`,
     fun:`A little offshore islet, the <i>Isola dei Conigli</i> (Rabbit Island), is shallow enough to wade out to when the sea is calm and low.` },
 
-  { emoji:"⛪", title:"Lecce — the Florence of the South", tag:"Day trip · 14 June · the Baroque capital",
+  { emoji:"⛪", title:"Lecce — the Florence of the South", tag:"Day trip · 12 June · the Baroque capital",
     story:`Lecce is the Baroque capital of the south — a whole golden city carved from soft local limestone, <i>pietra leccese</i>. The stone is so workable that 17th-century masons smothered the façades in swirling stone flowers, saints and beasts. Beneath the main square lies a Roman amphitheatre that once held as many as 25,000 spectators.`,
     know:`The showpiece is the <b>Basilica di Santa Croce</b>, an explosion of carved stone. The old town is flat and stroller-friendly — and the local treat is the <i>pasticciotto</i>, a warm custard-filled shortcrust born in this corner of Puglia.`,
     fun:`Pietra leccese is soft enough to cut with a knife when freshly quarried — it only hardens once it meets the open air.` },
@@ -684,6 +701,26 @@ function renderWeather(data){
   wxStatus.hidden=false;
   wxStatus.innerHTML=`<span><span style="color:var(--olive)">●</span> Live · Open-Meteo · checked ${t} · refreshes each time you open this page.</span>`
     +`<span>💧 Blue = ≥40% rain chance — glance at that day's bad-weather backup.</span>`;
+  fillDayChips(data);
+}
+
+// Stamp each day tab with its own live forecast (same data as the strip above).
+function fillDayChips(data){
+  WX_DAYS.forEach(d=>{
+    const chip=document.getElementById("wxchip"+d.n);
+    if(!chip) return;
+    const src=data[d.loc];
+    const i=(src&&src.daily&&src.daily.time)?src.daily.time.indexOf(d.iso):-1;
+    if(i<0) return;
+    const code=src.daily.weather_code[i];
+    const hi=Math.round(src.daily.temperature_2m_max[i]);
+    const rain=src.daily.precipitation_probability_max[i] ?? 0;
+    const [emoji,label]=WMO[code]||["❓","—"];
+    const wet=rain>=40;
+    chip.className="chip wx"+(wet?" wet":"");
+    chip.innerHTML=`<span role="img" aria-label="${label}">${emoji}</span> ${hi}° · 💧${rain}%`;
+    chip.hidden=false;
+  });
 }
 
 async function loadToday(){
