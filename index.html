@@ -173,7 +173,9 @@
   }
   .ico.route{background:rgba(47,111,126,.13);}
   .ico.food{background:rgba(189,90,53,.14);}
+  .ico.coffee{background:rgba(120,82,52,.16);}
   .ico.rain{background:rgba(99,116,140,.16);}
+  .coffee-note{display:block;margin-top:5px;font-size:.82rem;color:var(--ink-soft);font-style:italic;}
   .block .label{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:3px;}
   .block p{margin:0;font-size:.97rem;}
   .block.rain{background:rgba(99,116,140,.06);margin:6px -12px 0;padding:13px 12px;border-radius:12px;border-bottom:none;}
@@ -409,32 +411,37 @@ const M = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURICom
 const days = [
   { n:1, dow:"Thu", date:"Jun 11", title:"Arrival & Settling In", base:"Porto Cesareo",
     cost:"€60",
+    note:`✅ Done — arrived 11 Jun. Dinner at <b>Cento Ducati</b> was lovely. Walked past <b>Pizzeria Parthenope 2.0</b> and skipped it — looked basic, no holiday vibe (high rating ≠ charm).`,
     route:`Land at <b>11:30 AM</b>, pick up the car by <b>12:30</b>, then drive <b>~2h 20m</b> from Bari to Porto Cesareo (161 km) — long, but she'll likely nap most of it; break it with a quick lunch &amp; leg-stretch stop. Check in at Hotel Posidonia (opens 14:00), grab toddler essentials at a local <b>Conad</b> supermarket, and hit the local beach.`,
     place:"Porto Cesareo, Puglia",
+    coffee:{name:`Bar Principe`, rate:"★ 4.3 · 6,301", blurb:`Porto Cesareo's seafront institution on Piazza Nazario Sauro — a proper espresso and a cream pasticciotto to land the trip on, once you've checked in.`, q:"Bar Principe Porto Cesareo", note:`Below the 4.7 target — Porto Cesareo simply has no 4.7★ coffee bar; this is the town's most-loved.`},
     picks:[
-      {tag:"Main", name:`Cento Ducati Trattoria`, rate:"★ 4.8 · 537", blurb:`Authentic, cozy Salento home cooking (orecchiette, local meatballs) — family-run and warm with kids; lively enough that toddler noise blends in. Walk-in. Replaces the old Carmelo pick (only 12 reviews).`, q:"Cento Ducati Trattoria Porto Cesareo"},
-      {tag:"Option B", name:`Pizzeria Parthenope 2.0`, rate:"★ 4.5 · 1,594", blurb:`Fast Neapolitan pizza on a pedestrian square; go ~19:00 to beat the queue.`, q:"Pizzeria Parthenope 2.0 Porto Cesareo"},
+      {tag:"✅ Ate here", name:`Cento Ducati Trattoria`, rate:"★ 4.8 · 537", blurb:`Lovely — authentic, cozy Salento home cooking (orecchiette, local meatballs), family-run and warm with kids. Confirmed great in person.`, q:"Cento Ducati Trattoria Porto Cesareo"},
     ],
     rain:`Skip the beach stroll. Head to the hotel to unpack and spend a cozy afternoon introducing your toddler to local pastries at a covered café in town.` },
   { n:2, dow:"Fri", date:"Jun 12", title:"Baroque Charm of Lecce", base:"Porto Cesareo",
     cost:"€110",
-    note:`☔ Swapped from the beach day — Jun 12 forecasts thunderstorms, and Lecce's covered old town shrugs off rain.`,
-    route:`40-minute drive inland to <b>Lecce</b>, arriving by 09:30. Stroll the flat, stroller-friendly old town. Grab a <i>pasticciotto</i> at <b>Caffè Alvino</b> <span class="rate">★ 4.2 · 5,152</span> <a class="maplink" target="_blank" rel="noopener" href="${M('Caffè Alvino Lecce')}">📍 Maps</a> in Piazza Sant'Oronzo, then head to the Villa Comunale gardens for the playground.`,
+    note:`✅ Done — Lecce walking tour. <i>(Weather note: the "thunderstorm" forecast that bumped this off the beach was overnight only — the day was hot and clear, so the swap wasn't actually needed. Lesson logged: judge weather by the hour, not the day.)</i>`,
+    route:`Drove ~40 min to <b>Lecce</b> for a guided <b>walking tour</b> of the baroque old town. Drink a <b>caffè leccese</b> — espresso poured over almond-milk ice, the Salento local treat — and a <i>pasticciotto</i>. Then the Villa Comunale gardens for the playground.`,
     place:"Lecce old town, Piazza Sant'Oronzo",
+    coffee:{name:`Quarta (Quarta Caffè store)`, rate:"★ 4.7 · 116", blurb:`The historic Lecce roaster's tasting store on Via Federico D'Aragona, a 4-min walk from Sant'Oronzo — a genuinely excellent morning espresso. Beats the famous-but-touristy Caffè Alvino (★ 4.2) on the square.`, q:"Quarta Store Lecce Via Federico d'Aragona"},
     picks:[
-      {tag:"Main", name:`L'angolino di Via Matteotti`, rate:"★ 4.5 · 1,885", blurb:`Lecce's iconic puccia (stuffed flatbread) — fast, cheap (~€8), mess-free; a perfect toddler lunch. Use the outside tables (tiny indoors).`, q:"L'angolino di Via Matteotti Lecce"},
-      {tag:"Also great", name:`Antica Pucceria Giannone`, rate:"★ 4.7 · 957", blurb:`Equally loved puccia institution — the original pick.`, q:"Antica Pucceria Giannone Lecce"},
-      {tag:"Option B", name:`Signuria`, rate:"★ 4.8 · 669", blurb:`Highest-rated Lecce sit-down: refined, modern, all-weather indoors for a proper meal.`, q:"Signuria Restaurant Lecce"},
+      {tag:"✅ Lunch (Lecce)", name:`TAULA`, rate:"★ 4.6", blurb:`Amazing lunch — walked in without a booking and got lucky; book ahead to be safe. (Recommended by the walking-tour guide; wasn't on our original list.)`, q:"TAULA Lecce"},
+      {tag:"Tonight · dinner · Nardò", name:`La Dispensa dei Raccomandati`, rate:"★ 4.6 · 1,160", blurb:`Charming seafood trattoria in a 14th-c. building in Nardò's baroque old town (~20 min) — "top 3 of our 10-day Puglia trip." Fried local squid, swordfish, shrimp spaghetti. Reserve an outside table; go ~19:30.`, q:"La Dispensa dei Raccomandati Nardò"},
+      {tag:"Dinner · alt (coast)", name:`Larilò — Santa Caterina`, rate:"★ 4.7 · 230", blurb:`Intimate chef-driven gem on the Ionian coast (~15–20 min) — "arguably the best in the region," warm owner, modern take on tradition; pasta-meatballs toddler-approved. Portions run small (order an extra primo to share); confirm it's open tonight and park before the centre.`, q:"Larilò Santa Caterina Nardò"},
+      {tag:"Dinner · alt", name:`Antica Trattoria Salandra`, rate:"★ 4.6 · 769", blurb:`Cozier, cheaper, very-local — oldest trattoria in town, family-run, homestyle. Better if you want fast-and-easy with a tired toddler.`, q:"Antica Trattoria Salandra Nardò"},
     ],
-    tip:`Afternoon gelato: <b>Baldo</b> (★ 4.6 · 1,038) <a class="maplink" target="_blank" rel="noopener" href="${M('Baldo Gelato Lecce')}">📍 Maps</a> — artisan, in the centro storico. (Morning pasticciotto at Caffè Alvino is in the route above.)`,
+    tip:`Gelato: <b>Natale Pasticceria</b> — a Lecce town institution (guide's pick) <a class="maplink" target="_blank" rel="noopener" href="${M('Natale Pasticceria Lecce')}">📍 Maps</a>. And order a <b>caffè leccese</b> while you're in town — the local almond-milk iced espresso.`,
     rain:`<b>Museo dei Bambini</b> (Lecce Children's Museum) — a brilliant indoor space of interactive exhibits and sensory play areas tailored for ages 2–5.` },
   { n:3, dow:"Sat", date:"Jun 13", title:"Marine Protected Area Boat Tour", base:"Porto Cesareo",
     cost:"€100",
-    route:`Head to Porto Cesareo Marina by <b>08:30</b> for your pre-booked <b>09:00 boat tour</b>. Keep the afternoon entirely open for nap time and low-key beach/pool recovery.`,
-    place:"Porto Cesareo Marina",
+    route:`Porto Cesareo Marina by <b>08:30</b> for the pre-booked <b>09:00 boat tour</b>. After, she naps in the car on the <b>~40-min drive to Gallipoli</b> — lunch in the old town (see below), a wander past the castle, then back to base for afternoon recovery. <b>Park-and-walk:</b> Gallipoli old town is a ZTL island — park outside the bridge and walk in (camera fines otherwise).`,
+    place:"Gallipoli old town",
+    coffee:{name:`Bar Principe`, rate:"★ 4.3 · 6,301", blurb:`On Piazza Nazario Sauro, a 2-minute walk from the 09:00 departure — perfect for a quick pre-boat espresso and pasticciotto. Opens early.`, q:"Bar Principe Porto Cesareo", note:`Below the 4.7 target — the town's best coffee bar; nothing in Porto Cesareo clears 4.7★.`},
     picks:[
-      {tag:"Main", name:`Pizzeria Parthenope 2.0`, rate:"★ 4.5 · 1,594", blurb:`Fast, light Neapolitan pizzas — a lifesaver with a tired post-boat toddler. Go right at opening (~19:00). Pizzas €8–16.`, q:"Pizzeria Parthenope 2.0 Porto Cesareo"},
-      {tag:"Option B", name:`Cento Ducati Trattoria`, rate:"★ 4.8 · 537", blurb:`Keep it local and easy after the boat: cozy Salento home cooking.`, q:"Cento Ducati Trattoria Porto Cesareo"},
+      {tag:"Lunch · Gallipoli", name:`La Puritate`, rate:"★ 4.5 · 1,674", blurb:`Glass veranda right over the water — a recent review: "two couples and a baby, staff made us feel completely welcome… elegant but relaxed." Fresh seafood, breathtaking view. Reserve the veranda (limited; June Saturday). Order the gambero viola di Gallipoli — the sweet raw purple prawns.`, q:"La Puritate Gallipoli"},
+      {tag:"Lunch · alt", name:`La Vinaigrette`, rate:"★ 4.5 · 2,173", blurb:`Sea-view terrace, vaulted ceilings, warm ambience — "best seafood meal in Italy yet." A short walk from the castle.`, q:"Ristorante La Vinaigrette Gallipoli"},
+      {tag:"Dinner · back at base", name:`Cento Ducati Trattoria`, rate:"★ 4.8 · 537", blurb:`Keep it local and easy after a big day: cozy Salento home cooking, walk-in. (You already know it's good.)`, q:"Cento Ducati Trattoria Porto Cesareo"},
     ],
     rain:`Boat tours cancel if the sea is rough. If so, take a 30-minute drive inland to <b>Nardò</b> to explore its stone loggias and have lunch at <b>Ristorante Germogli al Mignano</b> <span class="rate">★ 4.3 · 379</span> <a class="maplink" target="_blank" rel="noopener" href="${M('Germogli al Mignano Nardo')}">📍 Maps</a>.<span class="note"><b>Heads-up:</b> this is a fine-dining rooftop (praised seafood/sushi), pricier and more formal than a trattoria — and rain shuts the terrace that's its main draw. Brilliant for a special dinner; for an easy wet-day toddler lunch a casual Nardò centro trattoria is comfier.</span>` },
   { n:4, dow:"Sun", date:"Jun 14", title:"Punta Prosciutto Beach & Stroll", base:"Porto Cesareo",
@@ -442,6 +449,7 @@ const days = [
     note:`☀️ Swapped in from Jun 12 — this is the clear, calm beach day. Book your lido a day or two ahead.`,
     route:`15-minute drive north to <b>Punta Prosciutto</b>. Be on the sand by <b>09:00</b> to secure parking and a shaded lido spot. Head back by 13:00 for nap time. Evening <i>passeggiata</i> around Porto Cesareo's marina.`,
     place:"Punta Prosciutto beach",
+    coffee:{name:`Mamamia Caffetteria`, rate:"★ 4.3 · 968", blurb:`On Via Torre Lapillo, right on the drive up to the sand — grab a cappuccino and a cornetto before you stake out the lido spot by 09:00.`, q:"Mamamia Caffetteria Torre Lapillo", note:`Below the 4.7 target — best in Torre Lapillo; the area has no 4.7★ coffee bar.`},
     picks:[
       {tag:"Main", name:`Lido Stella Maris`, rate:"★ 4.4 · 1,706", blurb:`Beachside pavilion on the sand at Torre Lapillo — eat where you already are, no packing the car. Shaded terrace, changing facilities. Ideal beach-day lunch.`, q:"Lido Stella Maris Torre Lapillo"},
       {tag:"Option B", name:`Cento Ducati Trattoria`, rate:"★ 4.8 · 537", blurb:`Cozy, family-run Salento home cooking back in town for a proper dinner.`, q:"Cento Ducati Trattoria Porto Cesareo"},
@@ -451,6 +459,7 @@ const days = [
     cost:"€120",
     route:`Check out of Porto Cesareo by <b>10:00</b> and break the drive with <b>one</b> stop:<br><b>Option A — Torre Guaceto</b> (~1h–1h15 from Porto Cesareo): a WWF marine reserve — calm shallow sea, boardwalks and a sea-turtle recovery centre; the toddler-easy choice. Then ~40 min to the Agriturismo. <i>Summer beach access is on foot/bike only: park at the main car park (~€8/car, includes the eco-shuttle), or at Punta Penna Grossa and walk ~500m — bring the carrier.</i><br><b>Option B — Ostuni</b>, the White City (~1h15): a dramatic hilltop old town — <i>use a baby carrier, the lanes are steep</i> <a class="maplink" target="_blank" rel="noopener" href="${M('Ostuni centro storico')}">📍 Ostuni map</a>. Then ~35 min to the Agriturismo.<br><i>Either way, be back in the car by ~13:30 so she naps on the final leg; check-in from 16:00.</i>`,
     place:"Riserva di Torre Guaceto Carovigno",
+    coffee:{name:`Caffè Fanelli Bistrot`, rate:"★ 4.3 · 416", blurb:`If you take the Ostuni option: the locals' café on Piazza della Libertà, the main square — a coffee-and-pastry break mid-drive before the steep white lanes.`, q:"Caffè Fanelli Bistrot Ostuni", note:`Below the 4.7 target — Ostuni's best; no 4.7★ coffee bar on this leg. (Or just have your hotel breakfast before the 10:00 checkout.)`},
     picks:[
       {tag:"Lunch · Torre Guaceto", name:`Al Diavoletto`, rate:"★ 4.4 · 282", blurb:`Carovigno pizzeria-trattoria near the reserve — pizza and pasta, warm with kids. (Or grilled meats at Braceria Mamma Lena ★ 4.3.)`, q:"Al Diavoletto Pizzeria Carovigno"},
       {tag:"Lunch · Ostuni", name:`Osteria Ricanatti`, rate:"★ 4.7 · 353", blurb:`Ostuni old-town osteria — homemade pasta, business-lunch menu, happily does small plates for a toddler.`, q:"Osteria Ricanatti Ostuni"},
@@ -462,6 +471,7 @@ const days = [
     cost:"€110",
     route:`~30-minute drive to <b>Alberobello</b>, arriving by <b>09:00</b> to beat the tour buses. Stick to the quieter Rione Aia Piccola neighborhood. Return to the Agriturismo by midday for a relaxed pool/farm afternoon.`,
     place:"Rione Aia Piccola Alberobello",
+    coffee:{name:`Cols — Coffee Experience`, rate:"★ 4.9 · 383", blurb:`Alberobello's specialty-coffee gem on Via Isonzo (featured in Italy's specialty-coffee guide) — a genuinely excellent flat white or espresso, a short walk from the trulli. Get there for the 09:00 arrival.`, q:"Cols coffee Alberobello", note:`If you'd rather stay among the trulli: 88 Gradi (★ 4.7 · 598) is right by Rione Aia Piccola.`},
     picks:[
       {tag:"Main", name:`Coppino`, rate:"★ 4.7 · 1,696", blurb:`In Alberobello — elite orecchiette and Puglian fare right on your trulli day, so you don't drive back hungry.`, q:"Coppino Alberobello"},
       {tag:"Option B", name:`Spaghetti d'Italia`, rate:"★ 4.8 · 1,958", blurb:`Outstanding fresh pasta on Monopoli's Piazza S. Antonio for dinner near the base; toddler-perfect, covered terrace (Bavarotti ★ 4.9 is next door).`, q:"Spaghetti d'Italia Monopoli"},
@@ -471,6 +481,7 @@ const days = [
     cost:"€130",
     route:`15-minute drive to <b>Polignano a Mare</b>. View the famous Lama Monachile cove from the balconies. Grab gelato at <b>Il Super Mago del Gelo</b> <span class="rate">★ 4.4 · 1,560</span> <a class="maplink" target="_blank" rel="noopener" href="${M('Il Super Mago del Gelo Polignano a Mare')}">📍 Maps</a> — the famous 1935 institution (try the signature <i>Caffè Speciale</i>), though service can be brusque. For the gelato itself, locals rate <b>Caruso Gelateria</b> <span class="rate">★ 4.5 · 1,884</span> <a class="maplink" target="_blank" rel="noopener" href="${M('Caruso Gelateria Polignano a Mare')}">📍 Maps</a> a notch higher — creamy, friendly, ~€2.50 a cup. Return for an afternoon nap, then spend the evening at Monopoli's old-town harbor.`,
     place:"Lama Monachile Polignano a Mare",
+    coffee:{name:`Marì — Urban Coffee & Pasticceria`, rate:"★ 4.7 · 91", blurb:`A modern coffee-and-pastry spot on Via Chiantera, just off the old town — proper coffee and fresh cornetti before the Lama Monachile crowds build.`, q:"Marì urban coffee pasticceria Polignano a Mare", note:`Caffè Italia (★ 4.6 · 186, Via Sarnelli) opens earliest if you want coffee before Marì.`},
     picks:[
       {tag:"Main", name:`Il Quadrifoglio (Polignano)`, rate:"★ 4.6 · 2,226", blurb:`Famous 72-hour pizza dough and Spaghetti all'Assassina; AC indoors. Very popular — arrive 19:30 sharp. (A bigger, different restaurant from the Monopoli one.)`, q:"Il Quadrifoglio Polignano a Mare"},
       {tag:"Option B", name:`Calapà`, rate:"★ 4.7 · 366", blurb:`Seafront Polignano dining — fresh de-boned fish, stunning coastal views.`, q:"Calapà Polignano a Mare"},
@@ -482,6 +493,7 @@ const days = [
     cost:"€140",
     route:`30-minute drive inland to <b>Grotte di Castellana</b>. Take the short 50-minute (1 km) tour — a cool 15–18°C underground, a perfect escape from the June heat. Use the free baby-carrier hire on-site. Afternoon open for a final pool session.`,
     place:"Grotte di Castellana",
+    coffee:{name:`Sugar Gelateria Caffetteria`, rate:"★ 4.7 · 708", blurb:`In Castellana Grotte town on Via Giovanni Bovio, right on the way to the caves — espresso and a famed brioche before you head underground for the 50-min tour.`, q:"Sugar Gelateria Caffetteria Castellana Grotte"},
     picks:[
       {tag:"Main", name:`Le Cucine di Masseria Spina`, rate:"★ 4.8 · 304", blurb:`A 500-year-old farm estate — vaulted halls, lawn space and a kids' play area (the toddler jackpot). Refined local seafood and meats. Reserve; mostly dinner service.`, q:"Le Cucine di Masseria Spina Monopoli"},
       {tag:"Option B", name:`Carlo Quinto`, rate:"★ 4.4 · 2,065", blurb:`Grand stone halls on Monopoli's sea wall — sea views, easy stroller access.`, q:"CarloQuinto Monopoli"},
@@ -492,6 +504,7 @@ const days = [
     cost:"€130",
     route:`Check out by <b>10:00</b>. Drive 15 minutes to <b>Zoosafari Fasano</b> — stay inside your rental car while giraffes and lions walk past the windows (a massive hit for a 2.5-year-old). Then 50 minutes to Bari: refuel and drop the car by <b>18:00</b> for your <b>20:00 flight</b>. <b>Cap-and-go:</b> Zoosafari opens 09:30 — do the drive-through loop only (skip the Fasanolandia rides) and be rolling toward Bari by <b>14:30</b> to protect the airport buffer.`,
     place:"Zoosafari Fasano",
+    coffee:{name:`Pasticceria Dolci Ricordi`, rate:"★ 4.8 · 75", blurb:`In Fasano on Via Cenci, on the short morning drive to the Zoosafari — top-rated pasticceria for a last Puglian coffee and pastry; grab-and-go friendly for the safari-and-airport day.`, q:"Pasticceria Dolci Ricordi Fasano"},
     picks:[
       {tag:"Main", name:`Panificio Fiore`, rate:"★ 4.6 · 3,658", blurb:`Bari — legendary focaccia barese, fast and portable; grab a warm slice for the airport run. Almost no seating, pure grab-and-go — perfect for a tight departure day.`, q:"Panificio Fiore Bari"},
       {tag:"Also great", name:`Bakery Santa Rita`, rate:"★ 4.8 · 4,828", blurb:`Rival focaccia king in Bari Vecchia if Fiore's queue is long.`, q:"Bakery Santa Rita Bari"},
@@ -537,6 +550,11 @@ days.forEach((d,i)=>{
         <div class="label">Route &amp; timeline</div><p>${d.route}</p>
         <a class="maplink" target="_blank" rel="noopener" href="${M(d.place)}">${pin} ${d.place} · open in Maps</a>
       </div></div>
+      ${d.coffee?`<div class="block"><div class="ico coffee">☕</div><div>
+        <div class="label">Morning coffee</div>
+        <div class="pick"><div class="pick-h"><b>${d.coffee.name}</b> <span class="rate">${d.coffee.rate}</span></div><p class="pick-b">${d.coffee.blurb} <a class="maplink" target="_blank" rel="noopener" href="${M(d.coffee.q)}">${pin} Maps</a></p></div>
+        ${d.coffee.note?`<span class="coffee-note">${d.coffee.note}</span>`:""}
+      </div></div>`:""}
       <div class="block"><div class="ico food">🍝</div><div>
         <div class="label">Where to eat</div>
         ${d.picks.map(p=>`<div class="pick"><div class="pick-h"><span class="pick-tag${p.tag==='Option B'?' b':''}">${p.tag}</span> <b>${p.name}</b> <span class="rate">${p.rate}</span></div><p class="pick-b">${p.blurb} <a class="maplink" target="_blank" rel="noopener" href="${M(p.q)}">${pin} Maps</a></p></div>`).join("")}
